@@ -2,6 +2,7 @@
   <main>
     <section>
       <h1>CSS Colors</h1>
+      <p>These are the CSS color classes which are being used on this site.</p>
     </section>
 
     <div class='outer grid'>
