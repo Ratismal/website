@@ -6,6 +6,9 @@
   "repository": "https://github.com/Ratismal/website",
   "author": "stupid cat",
   "license": "MIT",
+  "scripts": {
+    "build": "nuxt build"
+  },
   "devDependencies": {
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "13.1.0",
