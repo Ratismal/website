@@ -14,6 +14,8 @@ class Frontend {
     this.nuxtConfig = nuxtConfig;
 
     this.nuxt = new Nuxt(this.nuxtConfig);
+
+    console.info('Dev mode:', this.nuxtConfig.dev);
     if (this.nuxtConfig.dev) {
       const builder = new Builder(this.nuxt);
       builder.build();
