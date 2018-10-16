@@ -59,7 +59,8 @@
         <a href='https://blargbot.xyz'>blargbot</a>
         , a bot for the
         <a href='https://discordapp.com'>Discord</a>
-        chat platform which specializes in moderation utilities and customization. blargbot features
+        chat platform which specializes in moderation utilities and customization.
+        <code>blargbot</code> features
         <code>BBTag</code>, a toy language which allows users to create incredibly complex custom commands.
       </p>
 
