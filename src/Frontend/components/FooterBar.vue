@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class='flexbox'>
-      <span>Copyright &copy; {{getYear()}}</span>
+      <span>&copy; {{getYear()}} | Kirkland Morrill</span>
     </div>
   </footer>
 </template>
