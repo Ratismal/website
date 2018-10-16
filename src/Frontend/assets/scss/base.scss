@@ -1,0 +1,37 @@
+@import 'variables';
+@import 'parallax';
+@import 'text';
+
+html,
+body,
+#nuxt-wrapper {
+  @extend .grey.darken-5;
+  @extend .grey-text.lighten-4-text;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: $primary-typeface;
+}
+
+main {
+  font-size: 1.25em;  
+}
+
+section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+header {
+  @extend .grey.darken-4;
+
+  margin: 0 0 1em 0;
+  padding: 0.75em;
+}
+
+footer {
+  background: #101010;
+  padding: 20px;
+}

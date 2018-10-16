@@ -1,0 +1,29 @@
+{
+  "name": "stupidcat-website",
+  "version": "1.0.0",
+  "description": "stupid cat's personal website",
+  "main": "index.js",
+  "repository": "https://github.com/Ratismal/website",
+  "author": "stupid cat",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-vue": "^4.7.1",
+    "node-sass": "^4.9.4",
+    "sass-lint": "^1.12.1",
+    "sass-loader": "^7.1.0"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.3",
+    "cat-loggr": "^1.0.10",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "nuxt": "^2.2.0",
+    "pg": "^7.5.0",
+    "sequelize": "^4.39.1"
+  }
+}

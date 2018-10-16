@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+
+// Colors
+$background: #252525;
+
+$primary-color: #252525;
+$primary-text: #f9f9f9;
+$secondary-color: #384952;
+$accent-color: #00d3d3;
+$secondary-accent-color: #65ecec;
+
+$colors: (
+  'grey': #9e9e9e 8 10,
+  'red': #ad0a0a 10 5,
+  'orange': #d15108 10 5,
+  'yellow': #b1a500 10 5,
+  'green': #3d9635 10 5,
+  'blue': #1f219e 10 5,
+  'teal': #06b1b1 10 5,
+  'purple': #7206b1 10 5,
+);
+
+$colors-aliases: (
+  'primary': map-get($colors, 'teal'),
+  'warning': map-get($colors, 'orange'),
+  'danger': map-get($colors, 'red'),
+  'ok': map-get($colors, 'green')
+);
+
+$colors: map-merge($colors, $colors-aliases);
+
+@each $var in $colors {
+  $color: nth($var, 2);
+
+  .#{nth($var, 1)} {
+    background-color: nth($color, 1);
+
+    @for $i from 1 through 5 {
+      &.lighten-#{$i} {
+        background-color: lighten(nth($color, 1), $i * nth($color, 2));
+      }
+      &.darken-#{$i} {
+        background-color: darken(nth($color, 1), $i * nth($color, 3));
+      }
+    }
+  }
+
+  .#{nth($var, 1)}-text {
+    color: nth($color, 1);
+
+    @for $i from 1 through 5 {
+      &.lighten-#{$i}-text {
+        color: lighten(nth($color, 1), $i * nth($color, 2));
+      }
+      &.darken-#{$i}-text {
+        color: darken(nth($color, 1), $i * nth($color, 3));
+      }
+    }
+  }
+}
+
+$primary-typeface: 'Ubuntu', sans-serif;
