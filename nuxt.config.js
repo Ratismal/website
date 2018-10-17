@@ -15,7 +15,11 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
+
     script: [
+      // google analytics
+      { src: 'https://www.googletagmanager.com/gtag/js?id=UA-28511548-8', async: true },
+      { src: '/js/ganalytics.js' }
     ],
   },
   dev: config.beta,
