@@ -5,6 +5,7 @@
       <div class='flexbox'>
         <nuxt-link to='/'>Main</nuxt-link>
         <nuxt-link to='/colors'>Colors</nuxt-link>
+        <nuxt-link to='/avatars'>Avatars</nuxt-link>
       </div>
     </div>
   </header>
