@@ -11,6 +11,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'stupid cat\'s personal website' },
+      { name: 'keywords', content: 'stupid cat, kirkland morrill, ratismal' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
