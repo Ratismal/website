@@ -1,0 +1,9 @@
+
+            <nav>
+
+            </nav>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('nav').load('sidebar.html');
+                });
+            </script>

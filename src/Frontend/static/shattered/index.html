@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="author" content="stupid cat">
+    <meta content="A stupid site for a stupid cat." property="og:description">
+    <meta content="Shattered" property="og:site_name">
+    <meta content='https://raw.githubusercontent.com/Ratismal/blargbot/gh-pages/blargbot.png' property='og:image'>
+    <meta content='image/png' property='og:image:type'>
+    <meta content='688' property='og:image:width'>
+    <meta content='688' property='og:image:height'>
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/css/materialize.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/js/materialize.min.js"></script>
+    <title>shattered</title>
+</head>
+
+<body>
+    <header class='transparent'>
+        <div class="navbar-fixed z-depth-0 transparent">
+            <nav class='transparent z-depth-0'>
+                <div class="nav-wrapper transparent">
+                    <div class='container transparent'>
+                        <ul class="left hide-on-small-only">
+                            <li><a href="/">main page</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class='container'>
+            <div class='section'>
+                <div class="slider fullscreen">
+                    <ul class="slides">
+                        <li>
+                            <img src="/img/slider/asset-1.png">
+                            <div class="caption left-align">
+                                <h3>shattered</h3>
+                                <h5 class="light grey-text text-lighten-3">more details to come</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+   
+</body>
+<script>
+    $(document).ready(function () {
+        $('.slider').slider({
+            indicators: false
+        });
+    });
+    $(".dropdown-button").dropdown();
+</script>
+
+</html>

@@ -1,0 +1,383 @@
+/*************************
+*       Page
+*************************/
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color: #1d1f21;
+    color: lightblue;
+    overflow: hidden;
+    font-family: sans-serif;
+    text-shadow: -0.5px 0.5px #000000;
+}
+
+#wrapper {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+
+/*************************
+*       Header
+*************************/
+
+header {
+    color: #dddddd;
+    font-size: 0.8em;
+    word-spacing: 15px;
+    position: absolute;
+    height: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #454545;
+}
+
+header img {
+    float: left;
+    margin-right: 5px;
+}
+
+header p {
+    margin-top: 3px;
+    margin-bottom: 7px;
+    margin-left: 15px;
+}
+
+header p img {
+    padding: 2px;
+}
+
+header p img:hover {
+    background-color: #202020;
+    transition: 0.2s;
+}
+
+header .floatright {
+    float: right;
+}
+
+header .menu a {
+    padding: 3px 7px 3px 7px;
+    transition: 0.2s;
+}
+
+header .menu a:hover {
+    background-color: #202020;
+}
+
+
+/*************************
+*       Content
+*************************/
+
+#content {
+    position: absolute;
+    color: #dddddd;
+    font-family: monospace;
+    width: 100% - 20px;
+    left: 220px;
+    top: 50px;
+    bottom: -50px;
+    right: 0;
+    padding-right: 20px;
+    margin-right: 0;
+    line-height: 17px;
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/*************************
+*       Footer
+*************************/
+
+footer {
+    position: absolute;
+    background-color: #1c1c1e;
+    bottom: 0;
+    left: 200px;
+    height: 20px;
+    width: 100%;
+    border-top: 1px solid #707070;
+}
+
+
+/*************************
+*       Initial Text
+*************************/
+
+#initial {
+    margin-top: 5%;
+}
+
+#initial h1 {
+    font-size: 2em;
+}
+
+#initial p {
+    font-size: 1.5em;
+}
+
+
+/*************************
+*       Sidebar 1
+*************************/
+
+#sidebar {
+    font-size: 0.8em;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin-top: 50px;
+    width: 200px;
+    background-color: #454545;
+    position: absolute;
+}
+
+#sidebar a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+#sidebar h1 {
+    color: #aabbaa;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+#sidebar p {
+    text-align: left;
+    width: 170px;
+    margin-left: 20px;
+    font-size: 1em;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    padding-bottom: 1px;
+}
+
+#sidebar nav {
+    height: 800px;
+    margin-top: 30px;
+    border-top: 1px solid #707070;
+    width: 100%;
+    background-color: #535353;
+}
+
+#sidebar i {
+    text-shadow: -0.5px 0.5px #000000;
+    font-size: 0.7em;
+    color: #999999;
+}
+
+#sidebar button {
+    text-shadow: -0.5px 0.5px #000000;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font: inherit;
+    cursor: pointer;
+}
+
+
+/*************************
+*       Sidebar 2
+*************************/
+
+#sidebar2 {
+    height: 100%;
+    top: 0;
+    right: 0;
+    margin-top: 50px;
+    width: 20px;
+    background-color: #757575;
+    position: absolute;
+}
+
+
+/*************************
+*       Prettyprint
+*************************/
+
+pre.prettyprint {
+    display: block;
+    background-color: inherit;
+    border: none;
+    color: #606060;
+    white-space: pre-wrap;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+
+/**
+* HTML
+**/
+
+.lang-html .pun {
+    /* Punctuation */
+    color: #fff;
+}
+
+.lang-html .pln {
+    /* Plain text (content) */
+    color: #fff;
+}
+
+.lang-html .tag {
+    /* Tags */
+    color: #8080ff;
+}
+
+.lang-html .atn {
+    /* Attribute Names */
+    color: #409040;
+}
+
+.lang-html .atv {
+    /* Attribute Values */
+    color: #dc9050;
+}
+
+.lang-html .dec {
+    /* <!DOCTYPE> */
+    color: #ffffff;
+}
+
+.lang-html .com {
+    /* Comment */
+    color: #909090;
+}
+
+
+/**
+* CSS
+**/
+
+.lang-css .kwd {
+    /* Property Names */
+    color: #ba80ba;
+}
+
+.lang-css .kw {
+    /* Property Names */
+    color: #000000;
+}
+
+.lang-css .dec {
+    /* Numbers */
+    color: #66bb22;
+}
+
+.lang-css .lit {
+    /* Hex numbers */
+    color: #dc9050;
+}
+
+.lang-css .pun {
+    /* Punctuation */
+    color: #fff;
+}
+
+.lang-css .pln {
+    /* Plain text */
+    color: #8080ff;
+}
+
+.lang-css .com {
+    /* Comments */
+    color: #909090;
+}
+
+.lang-css .tag {
+    /* Tags */
+    color: #dc9050;
+}
+
+.lang-css .str {
+    color: #dc9050;
+}
+
+
+
+
+/**
+* JS
+**/
+
+.lang-js .str {
+    /* Strings */
+    color: #dc9050
+}
+
+.lang-js .kwd {
+    /* Base code */
+    color: #8080ff;
+}
+
+.lang-js .lit {
+    /* Numbers */
+    color: #68fb68
+}
+
+.lang-js .pun {
+    /* Punctuation */
+    color: #fff
+}
+
+.lang-js .pln {
+    /* Variable/Function names */
+    color: #ba80ba
+}
+
+.lang-js .com {
+    /* Comment */
+    color: #909090;
+}
+
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+    list-style-type: decimal !important;
+    background-color: inherit;
+}
+
+
+/*************************
+*       Text Formatting
+*************************/
+
+.white {
+    color: #FFFFFF;
+}
+
+.grey {
+    color: #aabbaa;
+}
+
+.indent {
+    padding-left: 20px;
+}
+
+.center {
+    text-align: center;
+    margin: 3px 0 0 0;
+    word-spacing: normal;
+}
+
+em {
+    font-weight: bold;
+}

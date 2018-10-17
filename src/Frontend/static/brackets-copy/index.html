@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+Look into this!
+https://jamesflorentino.github.io/nanoScrollerJS/
+Could be neat!
+-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Brackets Simulator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+    <script type="text/javascript" src="google-code-prettify/lang-css.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="load.js"></script>
+    <script type="text/javascript" src="switch.js"></script>
+    <script type="text/javascript" src="open.js"></script>
+	<link rel="shortcut icon" href="images/brackets.png">
+</head>
+
+<body>
+    <script type="text/javascript">
+        check();
+    </script>
+    <div id="wrapper">
+        <div id="sidebar">
+            <h1>Working Files</h1>
+            <br>
+            <div id="working"></div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#working').load('workspaces/base.html');
+                });
+            </script>
+			
+			
+        </div>
+
+        <header>
+            <img src="images/brackets.png" height=20px width=20px alt="brackets">
+            <p class="floatright">
+                <img src="images/minimize.png" height=20px width=20px alt="min">
+                <img src="images/window.png" height=20px width=20px alt="min">
+                <a href="../index.html"><img src="images/close.png" height=20px width=20px alt="min"></a>
+            </p>
+            <p class="center">brackets-copy/index.html - Brackets</p>
+
+            <p class="menu"><a>File</a><a>Edit</a><a>Find</a><a>View</a><a>Navigate</a><a>Debug</a><a>Help</a></p>
+
+        </header>
+
+        <div id="content">
+            <div id="initial">
+                <h1>no file open</h1>
+                <p>open a file on the left</p>
+                <p>&lt;--</p>
+            </div>
+        </div>
+        <script type="text/javascript">
+            blarg();
+        </script>
+        <footer>
+
+        </footer>
+        <div id="sidebar2"></div>
+
+    </div>
+</body>
+
+</html>
