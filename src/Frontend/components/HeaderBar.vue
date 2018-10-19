@@ -6,6 +6,7 @@
         <nuxt-link to='/'>Main</nuxt-link>
         <nuxt-link to='/colors'>Colors</nuxt-link>
         <nuxt-link to='/avatars'>Avatars </nuxt-link>
+        <nuxt-link to='/links'>Links </nuxt-link>
       </div>
     </div>
   </header>
