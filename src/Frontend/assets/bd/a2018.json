@@ -1,0 +1,338 @@
+{
+  "sceneName": "New Scene",
+  "lines": [
+    {
+      "iid": 1543346365208,
+      "id": "A01",
+      "parts": [
+        {
+          "iid": 1543346370720,
+          "text": "It is dark.\\n",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543346370720,
+          "text": "You cannot see anything.",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A02",
+      "background": "/img/bd/a2018/black.png"
+    },
+    {
+      "iid": 1543346385587,
+      "id": "A02",
+      "parts": [
+        {
+          "iid": 1543346386762,
+          "text": "The only thing audible is the\\n",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        },
+        {
+          "iid": 1543346386762,
+          "text": "sound of your ",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        },
+        {
+          "iid": 1543346386762,
+          "text": "own breath",
+          "speed": "100",
+          "pose": "",
+          "type": "KEY",
+          "goto": "",
+          "delay": 0
+        },
+        {
+          "iid": 1543346386762,
+          "text": ".",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A03",
+      "background": ""
+    },
+    {
+      "iid": 1543351066436,
+      "id": "A03",
+      "parts": [
+        {
+          "iid": 1543351067529,
+          "text": "Suddenly, there's a ",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        },
+        {
+          "iid": 1543351067529,
+          "text": "blinding\\nflash of light",
+          "speed": "100",
+          "pose": "",
+          "type": "KEY",
+          "goto": "",
+          "delay": 0
+        },
+        {
+          "iid": 1543351067529,
+          "text": "!",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A04",
+      "background": "/img/bd/a2018/flash.gif"
+    },
+    {
+      "iid": 1543351112952,
+      "id": "A04",
+      "parts": [
+        {
+          "iid": 1543351533746,
+          "text": "The words ",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543351533746,
+          "text": "HAPPY BIRTHDAY ",
+          "speed": "100",
+          "pose": "",
+          "type": "KEY",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543351533746,
+          "text": "appear\\nbefore you.\\n",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543351533746,
+          "text": "You notice a card on the ground.",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A05",
+      "background": "/img/bd/a2018/hbday.png"
+    },
+    {
+      "iid": 1543351596472,
+      "id": "A05",
+      "parts": [
+        {
+          "iid": 1543351600639,
+          "text": "\"HAPPY BIRTHDAY!\\n",
+          "speed": "100",
+          "pose": "",
+          "type": "SYSTEM",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543351600639,
+          "text": "I hope your birthday is filled with\\nhappiness, to the point where it\\nindeed is very happy.",
+          "speed": "100",
+          "pose": "",
+          "type": "SYSTEM",
+          "goto": "",
+          "delay": 0
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A06",
+      "background": "/img/bd/a2018/card.png"
+    },
+    {
+      "iid": 1543351685797,
+      "id": "A06",
+      "parts": [
+        {
+          "iid": 1543351686786,
+          "text": "Indeed, the happiness of your\\nbirthday is directly propotional\\nto the happiness you will\\nexperience on your birthday.",
+          "speed": "100",
+          "pose": "",
+          "type": "SYSTEM",
+          "goto": "",
+          "delay": "300"
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A07"
+    },
+    {
+      "iid": 1543351734798,
+      "id": "A07",
+      "parts": [
+        {
+          "iid": 1543351735804,
+          "text": "Do you understand?\\n\\n",
+          "speed": 200,
+          "pose": "",
+          "type": "SYSTEM",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543351735804,
+          "text": "Love, ",
+          "speed": "50",
+          "pose": "",
+          "type": "SYSTEM",
+          "goto": "",
+          "delay": "200"
+        },
+        {
+          "iid": 1543351735804,
+          "text": "Kirkland\"",
+          "speed": "050",
+          "pose": "",
+          "type": "SYSTEM",
+          "goto": "",
+          "delay": "200"
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A08"
+    },
+    {
+      "iid": 1543351809501,
+      "id": "A08",
+      "parts": [
+        {
+          "iid": 1543351813410,
+          "text": "There appears to be an image\\nattached to the card.",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A09"
+    },
+    {
+      "iid": 1543351861625,
+      "id": "A09",
+      "parts": [
+        {
+          "iid": 1543351868272,
+          "text": "                ",
+          "speed": "10",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        },
+        {
+          "iid": 1543351868272,
+          "text": "...",
+          "speed": "500",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A10",
+      "background": "https://i.pinimg.com/originals/99/ef/2b/99ef2bd3e38aee25d643f6d62415b769.jpg"
+    },
+    {
+      "iid": 1543351915459,
+      "id": "A10",
+      "parts": [
+        {
+          "iid": 1543351916178,
+          "text": "The end!\\n\\n",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": "300"
+        },
+        {
+          "iid": 1543351916178,
+          "text": "Clicking \"next\" will bring you\\nback to the beginning.",
+          "speed": "100",
+          "pose": "",
+          "type": "NORMAL",
+          "goto": "",
+          "delay": 0
+        }
+      ],
+      "character": "SYSTEM",
+      "title": "",
+      "pose": "",
+      "goto": "A01",
+      "background": "/img/bd/a2018/hbday.png"
+    }
+  ],
+  "characters": {
+    "SYSTEM": {
+      "name": ""
+    }
+  },
+  "evidence": {},
+  "inventory": {
+    "evidence": [],
+    "profiles": []
+  }
+}

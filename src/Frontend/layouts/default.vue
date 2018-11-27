@@ -1,5 +1,5 @@
 <template>
-  <div id='nuxt-wrapper' class='grey darken-4'>
+  <div id="nuxt-wrapper" class="grey darken-4">
     <header-bar/>
     <nuxt/>
     <footer-bar/>
@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import HeaderBar from '~/components/HeaderBar.vue';
-import FooterBar from '~/components/FooterBar.vue';
+import HeaderBar from "~/components/HeaderBar.vue";
+import FooterBar from "~/components/FooterBar.vue";
 
 export default {
-  components: { HeaderBar, FooterBar },
+  components: { HeaderBar, FooterBar }
 };
 </script>

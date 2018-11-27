@@ -5,20 +5,20 @@
       <p>This is a collection of all the avatars I've made and used. For your convenience, images will only
         <!-- -->display when you hover over them!</p>
     </section>
-    <div class='flexbox'>
-      <avatar v-for='n in total' :key='n' :avatar-id='n' />
+    <div class="flexbox">
+      <avatar v-for="n in total" :key="n" :avatar-id="n" />
     </div>
   </main>
 </template>
 
 <script>
-import Avatar from '~/components/Avatar.vue';
+import Avatar from "~/components/Avatar.vue";
 
 export default {
-  data: () => ({
-    total: 31,
-  }),
   components: { Avatar },
+  data: () => ({
+    total: 31
+  })
 };
 </script>
 

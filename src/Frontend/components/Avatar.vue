@@ -1,25 +1,31 @@
 <template>
   <div>
     <figure>
-      <img @mouseover='mouseOver' :src='initial' alt='a lovely avatar!'>
-      <figcaption>Avatar #{{this.avatarId}}</figcaption>
+      <img :src="initial" alt="a lovely avatar!" @mouseover="mouseOver">
+      <figcaption>Avatar #{{ avatarId }}</figcaption>
     </figure>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['avatarId'],
+  props: {
+    avatarId: {
+      type: Number,
+      default: 0
+    }
+  },
   data: () => ({
-    initial: '/img/avatars/placeholder.png',
+    initial: "/img/avatars/placeholder.png"
   }),
   methods: {
     mouseOver() {
-      this.initial = `/img/avatars/${this.avatarId}.${this.avatarId < 8 ? 'png' : 'gif'}`;
-    },
-  },
+      this.initial = `/img/avatars/${this.avatarId}.${
+        this.avatarId < 8 ? "png" : "gif"
+      }`;
+    }
+  }
 };
-
 </script>
 
 <style lang="scss" scoped>

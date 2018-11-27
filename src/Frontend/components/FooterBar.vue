@@ -1,7 +1,7 @@
 <template>
   <footer>
-    <div class='flexbox'>
-      <span>&copy; {{getYear()}} | Kirkland Morrill</span>
+    <div class="flexbox">
+      <span>&copy; {{ getYear() }} | Kirkland Morrill</span>
     </div>
   </footer>
 </template>
@@ -11,8 +11,8 @@ export default {
   methods: {
     getYear() {
       return new Date().getFullYear();
-    },
-  },
+    }
+  }
 };
 </script>
 

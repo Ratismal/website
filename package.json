@@ -7,7 +7,8 @@
   "author": "stupid cat",
   "license": "MIT",
   "scripts": {
-    "build": "nuxt build"
+    "build": "nuxt build",
+    "dev": "nuxt"
   },
   "devDependencies": {
     "eslint": "^5.3.0",

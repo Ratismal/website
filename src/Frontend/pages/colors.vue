@@ -5,24 +5,24 @@
       <p>These are the CSS color classes which are being used on this site.</p>
     </section>
 
-    <div class='outer grid'>
-      <div class='inner grid' v-for='color in colors' :key='color'>
-        <div class='el text'>
-          <div v-for='n in 5' :key='n' :class='getText(color, n, true)'>
-            {{color}}-text lighten-{{5 - n + 1}}-text
+    <div class="outer grid">
+      <div v-for="color in colors" :key="color" class="inner grid">
+        <div class="el text">
+          <div v-for="n in 5" :key="n" :class="getText(color, n, true)">
+            {{ color }}-text lighten-{{ 5 - n + 1 }}-text
           </div>
-          <div :class='color + "-text"'>{{color}}-text</div>
-          <div v-for='n in 5' :key='n' :class='getText(color, n, false)'>
-            {{color}}-text darken-{{n}}-text
+          <div :class="color + &quot;-text&quot;">{{ color }}-text</div>
+          <div v-for="n in 5" :key="n" :class="getText(color, n, false)">
+            {{ color }}-text darken-{{ n }}-text
           </div>
         </div>
-        <div class='el color'>
-          <div v-for='n in 5' :key='n' :class='getColor(color, n, true)'>
-            {{color}} lighten-{{5 - n + 1}}
+        <div class="el color">
+          <div v-for="n in 5" :key="n" :class="getColor(color, n, true)">
+            {{ color }} lighten-{{ 5 - n + 1 }}
           </div>
-          <div :class='color'>{{color}}</div>
-          <div v-for='n in 5' :key='n' :class='getColor(color, n, false)'>
-            {{color}} darken-{{n}}
+          <div :class="color">{{ color }}</div>
+          <div v-for="n in 5" :key="n" :class="getColor(color, n, false)">
+            {{ color }} darken-{{ n }}
           </div>
         </div>
       </div>
@@ -34,19 +34,28 @@
 export default {
   data: () => ({
     colors: [
-      'grey', 'red', 'orange',
-      'yellow', 'green', 'teal',
-      'blue', 'purple',
-    ],
+      "grey",
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "teal",
+      "blue",
+      "purple"
+    ]
   }),
   methods: {
     getColor(color, i, lighten) {
-      return `${color} ${lighten ? 'grey-text darken-5-text lighten' : 'darken'}-${lighten ? 5 - i + 1 : i}`;
+      return `${color} ${
+        lighten ? "grey-text darken-5-text lighten" : "darken"
+      }-${lighten ? 5 - i + 1 : i}`;
     },
     getText(color, i, lighten) {
-      return `${color}-text ${lighten ? 'lighten' : 'darken'}-${lighten ? 5 - i + 1 : i}-text`;
-    },
-  },
+      return `${color}-text ${lighten ? "lighten" : "darken"}-${
+        lighten ? 5 - i + 1 : i
+      }-text`;
+    }
+  }
 };
 </script>
 

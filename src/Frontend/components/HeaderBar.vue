@@ -1,21 +1,19 @@
 <template>
   <header>
-    <div class='flexbox'>
-      <span class='title'>stupid cat</span>
-      <div class='flexbox'>
-        <nuxt-link to='/'>Main</nuxt-link>
-        <nuxt-link to='/colors'>Colors</nuxt-link>
-        <nuxt-link to='/avatars'>Avatars </nuxt-link>
-        <nuxt-link to='/links'>Links </nuxt-link>
+    <div class="flexbox">
+      <span class="title">stupid cat</span>
+      <div class="flexbox">
+        <nuxt-link to="/">Main</nuxt-link>
+        <nuxt-link to="/colors">Colors</nuxt-link>
+        <nuxt-link to="/avatars">Avatars </nuxt-link>
+        <nuxt-link to="/links">Links </nuxt-link>
       </div>
     </div>
   </header>
 </template>
 
 <script>
-export default {
-
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
