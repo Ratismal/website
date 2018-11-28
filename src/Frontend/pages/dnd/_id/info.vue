@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="stats-wrapper">
+      <span class="key">Race:</span>
+      <span class="value">{{ data.race }}</span>
       <span class="key">Age:</span>
       <span class="value">{{ data.age }}</span>
       <span class="key">Sex:</span>
