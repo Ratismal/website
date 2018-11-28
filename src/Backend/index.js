@@ -1,6 +1,7 @@
 const CatLoggr = require('cat-loggr');
 const Frontend = require('../Frontend');
 const config = require('../../config.json');
+const db = require('../../models');
 
 const Chalk = CatLoggr._chalk; // eslint-disable-line no-underscore-dangle
 
@@ -16,8 +17,8 @@ new CatLoggr({
     { name: 'init', color: Chalk.black.bgBlue },
     { name: 'info', color: Chalk.black.bgGreen },
     { name: 'verbose', color: Chalk.black.bgCyan },
-    { name: 'debug', color: Chalk.magenta.bgBlack, aliases: ['log', 'dir'] },
-  ],
+    { name: 'debug', color: Chalk.magenta.bgBlack, aliases: ['log', 'dir'] }
+  ]
 }).setGlobal();
 
 process.on('unhandledRejection', (err) => {
@@ -27,6 +28,8 @@ process.on('unhandledRejection', (err) => {
 class Backend {
   constructor() {
     this.config = config;
+    this.db = db;
+
     this.frontend = new Frontend(this);
 
     this.start();

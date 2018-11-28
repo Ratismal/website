@@ -2,6 +2,7 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const { Nuxt, Builder } = require('nuxt');
 const nuxtConfig = require('../../nuxt.config.js');
+const Security = require('./Security');
 
 const ApiRoute = require('./routes/api');
 
@@ -25,8 +26,22 @@ class Frontend {
 
     this.app.use(async (ctx, next) => {
       ctx.status = 200;
-      await next();
+      try {
+        await next();
+      } catch (err) {
+        ctx.status = err.status || 500;
+        ctx.body = {
+          message: err.message
+        };
+      }
       console.log('Middleware Complete: %s', ctx.path);
+    });
+
+    this.app.use(async (ctx, next) => {
+      let token = ctx.request.headers.authorization || ctx.cookies.get('token');
+      let parsed = Security.validateToken(token);
+      ctx.state.auth = parsed;
+      await next();
     });
 
     this.apiRoute = new ApiRoute(this);
