@@ -48,7 +48,7 @@
             But none of that mattered, for Lintel had a dream.
           </p>
           <p>
-            He would be come a mighty adventurer, and bring pride and admiration to his clan!
+            He would become a mighty adventurer, and bring pride and admiration to his clan!
           </p>
           <p>
             So, he trained. Despite his small stature, he could find his way around a sword.
