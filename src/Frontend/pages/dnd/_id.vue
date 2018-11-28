@@ -76,7 +76,10 @@ export default {
   },
   mounted() {
     if (localStorage.token && !this.$cookies.get("token")) {
-      this.$cookies.set("token", localStorage.token, { maxAge: 99999999999 });
+      this.$cookies.set("token", localStorage.token, {
+        path: "/",
+        maxAge: 99999999999
+      });
     }
   },
   methods: {
