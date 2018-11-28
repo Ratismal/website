@@ -1,6 +1,7 @@
 .character-wrapper {
   display: flex;
-
+  flex-wrap: wrap;
+  justify-content: center;
   .avatar {
     flex: 0 1 auto;
     flex-basis: 0;
