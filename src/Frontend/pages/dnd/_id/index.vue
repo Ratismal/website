@@ -1,11 +1,26 @@
 <template>
-  <div/>
+  <div>
+    <markdown v-if="obtained" :content="data.story"/>
+    <div v-else>
+      There's nothing here. Why not make this character real?
+    </div>
+  </div>
 </template>
 
 <script>
+import Markdown from "~/components/Markdown.vue";
+
 export default {
-  mounted() {
-    this.$router.replace("/dnd/" + this.$route.params.id + "/story");
+  components: { Markdown },
+  props: {
+    data: {
+      type: Object,
+      default: () => ({})
+    },
+    obtained: {
+      type: Boolean,
+      default: false
+    }
   }
 };
 </script>

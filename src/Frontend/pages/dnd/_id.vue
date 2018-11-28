@@ -23,10 +23,10 @@
           <h1>{{ data.name }}</h1>
 
           <div class="button-group">
-            <nuxt-link to="story" class="center flex-1">Story</nuxt-link>
-            <nuxt-link to="info" class="center flex-1">Info</nuxt-link>
-            <nuxt-link to="notes" class="center flex-1">Notes</nuxt-link>
-            <nuxt-link to="edit" class="center flex-1">Edit</nuxt-link>
+            <nuxt-link :to="`/dnd/${this.$route.params.id}`" class="center flex-1">Story</nuxt-link>
+            <nuxt-link :to="`/dnd/${this.$route.params.id}/info`" class="center flex-1">Info</nuxt-link>
+            <nuxt-link :to="`/dnd/${this.$route.params.id}/notes`" class="center flex-1">Notes</nuxt-link>
+            <nuxt-link :to="`/dnd/${this.$route.params.id}/edit`" class="center flex-1">Edit</nuxt-link>
           </div>
 
           <nuxt-child :data="data" :obtained="obtained"/>
