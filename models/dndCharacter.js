@@ -77,6 +77,10 @@ module.exports = (sequelize, DataTypes) => {
     customAttributes: {
       type: DataTypes.JSON,
       default: {}
+    },
+    notes: {
+      type: DataTypes.TEXT,
+      default: ''
     }
   });
 

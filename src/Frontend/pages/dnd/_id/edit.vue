@@ -33,6 +33,14 @@ export default {
       }
     }
   },
+  watch: {
+    data: {
+      handler(val) {
+        this.displayed = "";
+      },
+      deep: true
+    }
+  },
   methods: {
     persist() {
       try {
@@ -70,14 +78,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-textarea {
-  width: 100%;
-  height: 100%;
-  min-height: 400px;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
-  border: none;
-  padding: 10px;
-  box-sizing: border-box;
-}
 </style>

@@ -33,6 +33,10 @@ module.exports = class ApiRoute {
 
   async getDndCharacter(ctx, next) {
     const char = await this.db.dnd_character.findByPk(ctx.state.id);
+    let values = char.dataValues;
+    if (!ctx.state.auth || char.ownerId !== ctx.state.auth.id) {
+      values.notes = '[REDACTED]';
+    }
     ctx.assert(char, 404, 'A character was not found');
     ctx.body = char.dataValues;
   }

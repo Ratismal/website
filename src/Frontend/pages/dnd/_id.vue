@@ -25,6 +25,7 @@
           <div class="button-group">
             <nuxt-link to="story" class="center flex-1">Story</nuxt-link>
             <nuxt-link to="info" class="center flex-1">Info</nuxt-link>
+            <nuxt-link to="notes" class="center flex-1">Notes</nuxt-link>
             <nuxt-link to="edit" class="center flex-1">Edit</nuxt-link>
           </div>
 
@@ -66,10 +67,16 @@ export default {
           statWisdom: [0],
           statCharisma: [0],
           icon: "",
-          story: ""
+          story: "",
+          notes: ""
         },
         obtained: false
       };
+    }
+  },
+  mounted() {
+    if (localStorage.token && !this.$cookies.get("token")) {
+      this.$cookies.set("token", localStorage.token, { maxAge: 99999999999 });
     }
   },
   methods: {

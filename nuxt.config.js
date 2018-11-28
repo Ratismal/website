@@ -39,7 +39,8 @@ module.exports = {
       prefix: '/api',
       proxy: true,
       port: 8109
-    }]
+    }],
+    'cookie-universal-nuxt'
   ],
   proxy: {
     '/api/': config.origin || 'https://stupidcat.me'
