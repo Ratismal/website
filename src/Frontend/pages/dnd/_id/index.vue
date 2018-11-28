@@ -5,7 +5,7 @@
 <script>
 export default {
   mounted() {
-    this.$router.replace(this.$route.params.id + "/story");
+    this.$router.replace("/dnd/" + this.$route.params.id + "/story");
   }
 };
 </script>
