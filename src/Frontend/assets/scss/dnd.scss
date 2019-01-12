@@ -1,0 +1,33 @@
+.character-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .avatar {
+    flex: 0 1 auto;
+    flex-basis: 0;
+
+    img {
+      height: 320px;
+      width: 320px;
+      image-rendering: pixelated;
+    }
+  }
+
+  .content {
+    flex: 1 0 auto;
+    margin: 0 2rem;
+    flex-basis: 0;
+  }
+}
+
+.stats-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 0.5rem;
+  margin: 1rem;
+
+  .key {
+    text-align: right;
+  }
+}

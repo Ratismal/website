@@ -11,17 +11,17 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'stupid cat\'s personal website' },
-      { name: 'keywords', content: 'stupid cat, kirkland morrill, ratismal' },
+      { name: 'keywords', content: 'stupid cat, kirkland morrill, ratismal' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
 
     script: [
       // google analytics
       { src: 'https://www.googletagmanager.com/gtag/js?id=UA-28511548-8', async: true },
-      { src: '/js/ganalytics.js' },
-    ],
+      { src: '/js/ganalytics.js' }
+    ]
   },
   dev: config.beta,
 
@@ -38,12 +38,18 @@ module.exports = {
     ['@nuxtjs/axios', {
       prefix: '/api',
       proxy: true,
-      port: 8109,
+      port: 8109
     }],
+    'cookie-universal-nuxt'
   ],
   proxy: {
-    '/api/': config.origin || 'https://stupidcat.me',
+    '/api/': config.origin || 'https://stupidcat.me'
   },
+
+  plugins: [
+    '~/plugins/markdown.js'
+  ],
+
   /*
    ** Build configuration
    */
@@ -58,7 +64,7 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/,
+          exclude: /(node_modules)/
         });
       }
 
@@ -72,6 +78,6 @@ module.exports = {
           p = formattedPercent;
         }
       };
-    },
-  },
+    }
+  }
 };
