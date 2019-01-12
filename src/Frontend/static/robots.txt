@@ -1,0 +1,3 @@
+# Disallow special user pages
+User-agent: *
+Disallow: /img/avatars/*
