@@ -147,7 +147,7 @@ export default {
     },
     serialize(row) {
       let add = Object.keys(row.traits)
-        .filter(t => row.traits[t] !== null)
+        .filter(t => !!row.traits[t])
         .map(t => {
           let val = row.traits[t];
           if (t === "additional") return val;
