@@ -28,7 +28,7 @@ export default {
     let obj = {
       color: "#000000",
       staticColor: false,
-      margin: 0,
+      margin: 48,
       interval: null,
       percent: 0,
       initialized: false,
