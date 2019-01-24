@@ -124,7 +124,7 @@ main {
   display: flex;
   flex-direction: column;
 
-  transition-duration: 5s;
+  transition: background 5s;
 }
 
 .middle {
