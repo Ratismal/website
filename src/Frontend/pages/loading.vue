@@ -14,6 +14,16 @@
 <script>
 export default {
   layout: "custom",
+  head() {
+    return {
+      title: this.title
+    };
+  },
+  computed: {
+    title() {
+      return this.percent + "% loaded...";
+    }
+  },
   asyncData({ route }) {
     let obj = {
       color: "#000000",
