@@ -95,3 +95,35 @@ textarea {
   padding: 10px;
   box-sizing: border-box;
 }
+
+input {
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  color: white;
+  font-size: 1.2em;
+  flex: 1 1 auto;
+  .full {
+    width: 100%;
+  }
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 0.5rem;
+  box-sizing: border-box;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.flex {
+  flex: 1 0 auto;
+}
