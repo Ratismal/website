@@ -362,6 +362,9 @@ export default {
       }
       return false;
     }
+  },
+  head: {
+    title: "TonyML Generator"
   }
 };
 </script>
