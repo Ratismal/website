@@ -13,10 +13,24 @@
         <span>Table Name</span>
         <input v-model="title" type="text">
       </div>
+      <div class="input-field">
+        <span>Load Table</span>
+        <div class="field-group">
+          <select v-model="newTitle">
+            <option v-for="title in tables" :key="title">{{ title }}</option>
+          </select>
+          <button class="button flex no-margin" @click.prevent="load">Load</button>
+
+        </div>
+      </div>
       <hr>
       <div class="input-field">
         <span>Current Row</span>
-        <input v-model="currentIndex" type="number">
+        <select v-model="currentIndex" >
+          <option v-for="row in rows" :key="row._id" :value="rows.indexOf(row)">
+            {{ row.name }}
+          </option>
+        </select>
       </div>
       <div v-if="rows[currentIndex]">
         <div class="field-group">
@@ -57,6 +71,16 @@
             <input v-model="rows[currentIndex].traits.references">
           </div>
         </div>
+        <div class="field-group">
+          <div class="input-field">
+            <span>Identity Start</span>
+            <input v-model="rows[currentIndex].traits.start">
+          </div>
+          <div class="input-field">
+            <span>Identity Increment</span>
+            <input v-model="rows[currentIndex].traits.increment">
+          </div>
+        </div>
         <div class="input-field">
           <span>Additional Constraints</span>
           <input v-model="rows[currentIndex].traits.additional">
@@ -91,6 +115,14 @@
         <button class="button full" @click.prevent="copyTable">Copy</button>
       </div>
     </section>
+
+    <section>
+      <h2>hotkeys</h2>
+      <div v-for="(hotkey, key) in hotkeys" :key="key">
+        <code>CTRL+{{ key }}</code>: <span>{{ hotkey.desc }}</span>
+      </div>
+    </section>
+    <br>
   </main>
 </template>
 
@@ -110,13 +142,100 @@ export default {
             size: null,
             order: null,
             references: null,
-            additional: null
+            additional: null,
+            start: null,
+            increment: null
           }
         }
       ],
       title: "Cool Table",
-      currentIndex: 0
+      newTitle: "",
+      currentIndex: 0,
+
+      hotkeys: {
+        s: {
+          func: () => {
+            this.save();
+          },
+          desc: "Saves the table."
+        },
+        n: {
+          func: () => {
+            this.newField();
+          },
+          desc: "Adds a new field to the table."
+        },
+        N: {
+          func: () => {
+            this.title = "Cool Table";
+            this.rows = [];
+            this.newField();
+          },
+          desc: "Creates a new table."
+        },
+        r: {
+          func: () => {
+            this.removeCurrent();
+          },
+          desc: "Removes the current field."
+        },
+        k: {
+          func: () => {
+            if (this.current) this.current.pk = !this.current.pk;
+          },
+          desc: "Toggles primary key for the current field."
+        },
+        K: {
+          func: () => {
+            if (this.current) this.current.fk = !this.current.fk;
+          },
+          desc: "Toggles foreign key for the current field."
+        },
+        m: {
+          func: () => {
+            if (this.current) this.current.nullable = !this.current.nullable;
+          },
+          desc: "Toggles nullable for the current field."
+        },
+        v: {
+          func: () => {
+            this.currentIndex--;
+            if (this.currentIndex < 0) this.currentIndex = 0;
+          },
+          desc: "Moves to the previous field."
+        },
+        b: {
+          func: () => {
+            this.currentIndex++;
+            if (this.currentIndex > this.rows.length - 1)
+              this.currentIndex = this.rows.length - 1;
+          },
+          desc: "Moves to the next field."
+        }
+      }
     };
+  },
+  computed: {
+    tables() {
+      try {
+        return Object.keys(JSON.parse(localStorage.getItem("stored")));
+      } catch (err) {
+        return [];
+      }
+    },
+    current() {
+      return this.rows[this.currentIndex];
+    }
+  },
+  mounted() {
+    document.addEventListener("keydown", e => {
+      if (e.ctrlKey) {
+        if (this.handleKeypress(e)) {
+          // console.log("Preventing default.");
+          e.preventDefault();
+        }
+      }
+    });
   },
   methods: {
     newField() {
@@ -126,12 +245,14 @@ export default {
         fk: false,
         name: "NewField",
         type: "Number",
-        nullable: false,
+        nullable: true,
         traits: {
           size: null,
           order: null,
           references: null,
-          additional: null
+          additional: null,
+          start: null,
+          increment: null
         }
       });
       this.currentIndex = this.rows.length - 1;
@@ -151,6 +272,7 @@ export default {
         .map(t => {
           let val = row.traits[t];
           if (t === "additional") return val;
+          else if (t === "order") return `key=PK, ${t}=${val}`;
           else return `${t}=${val}`;
         });
       return `${row.name}:${row.type}${row.nullable ? "[0..1]" : ""} ${
@@ -203,6 +325,42 @@ export default {
         range.moveToElementText(el);
         range.select();
       }
+    },
+    save() {
+      console.log("Saving...");
+      let store;
+      try {
+        store = JSON.parse(localStorage.getItem("stored"));
+      } catch (err) {}
+      if (!store) {
+        localStorage.setItem("stored", "{}");
+        store = {};
+      }
+      store[this.title] = this.rows;
+      localStorage.setItem("stored", JSON.stringify(store));
+    },
+    load() {
+      let store;
+      try {
+        store = JSON.parse(localStorage.getItem("stored"));
+      } catch (err) {}
+      if (!store) {
+        localStorage.setItem("stored", "{}");
+        store = {};
+      }
+      let rows = store[this.newTitle];
+      this.rows = rows || [];
+      this.title = this.newTitle;
+      this.newTitle = "";
+    },
+    handleKeypress(e) {
+      let el = this.rows[this.currentIndex];
+
+      if (this.hotkeys[e.key]) {
+        this.hotkeys[e.key].func();
+        return true;
+      }
+      return false;
     }
   }
 };

@@ -76,6 +76,10 @@ footer {
   margin: 1rem 0;
   display: block;
 
+  &.no-margin {
+    margin: 0;
+  }
+
   &.full {
     width: 100%;
   }
@@ -96,7 +100,7 @@ textarea {
   box-sizing: border-box;
 }
 
-input {
+input, select {
   background: rgba(0, 0, 0, 0.4);
   border: none;
   outline: none;
