@@ -364,7 +364,8 @@ export default {
     }
   },
   head: {
-    title: "TonyML Generator"
+    title: "TonyML Generator",
+    link: [{ rel: "icon", type: "image/x-icon", href: "/img/tony.png" }]
   }
 };
 </script>
