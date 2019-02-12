@@ -13,14 +13,28 @@
         <span>Table Name</span>
         <input v-model="title" type="text">
       </div>
-      <div class="input-field">
-        <span>Load Table</span>
-        <div class="field-group">
-          <select v-model="newTitle">
-            <option v-for="title in tables" :key="title">{{ title }}</option>
+      <div class="field-group">
+        <div class="input-field">
+          <span>Load Workspace</span>
+          <select v-model="tempWorkspace">
+            <option v-for="(ws, title) in stored.data" :key="title">{{ title }}</option>
           </select>
-          <button class="button flex no-margin" @click.prevent="load">Load</button>
+        </div>
+        <div class="input-field">
+          <span>Load Table</span>
+          <select v-model="newTitle" @change="load">
+            <option v-for="(table, title) in stored.data[tempWorkspace]" :key="title">{{ title }}</option>
+          </select>
+        </div>          <!-- <button class="button flex no-margin" @click.prevent="load">Load</button> -->
+      </div>
 
+      <span>New Workspace</span>
+      <div class="field-group">
+        <div class="input-field">
+          <input v-model="newWorkspace" type="text">
+        </div>
+        <div class="input-field">
+          <button class="button flex no-margin" @click="addWorkspace">Add</button>
         </div>
       </div>
       <hr>
@@ -62,10 +76,10 @@
             <span>Size</span>
             <input v-model="rows[currentIndex].traits.size">
           </div>
-          <div class="input-field">
+          <!-- <div class="input-field">
             <span>Order</span>
             <input v-model="rows[currentIndex].traits.order">
-          </div>
+          </div> -->
           <div class="input-field">
             <span>References</span>
             <input v-model="rows[currentIndex].traits.references">
@@ -148,10 +162,16 @@ export default {
           }
         }
       ],
+      workspace: "default",
+      newWorkspace: "",
+      tempWorkspace: "default",
       title: "Cool Table",
       newTitle: "",
       currentIndex: 0,
-
+      stored: {
+        data: {},
+        version: 2
+      },
       hotkeys: {
         s: {
           func: () => {
@@ -218,16 +238,66 @@ export default {
   computed: {
     tables() {
       try {
-        return Object.keys(JSON.parse(localStorage.getItem("stored")));
+        return Object.keys(this.stored.data[this.tempWorkspace]);
+      } catch (err) {
+        return [];
+      }
+    },
+    workspaces() {
+      try {
+        return Object.keys(this.stored.data);
       } catch (err) {
         return [];
       }
     },
     current() {
       return this.rows[this.currentIndex];
+    },
+    currentPk() {
+      return this.rows[this.currentIndex].pk;
+    }
+  },
+  watch: {
+    currentPk() {
+      this.calculateOrders();
     }
   },
   mounted() {
+    let stored;
+    try {
+      stored = JSON.parse(localStorage.getItem("stored"));
+      if (typeof stored !== "object") {
+        // NO-OP
+      } else if (!stored.version) {
+        let oldStored = stored;
+        stored = {
+          version: 2,
+          data: {
+            default: {}
+          }
+        };
+        for (const key in oldStored) {
+          stored.data.default[key] = { rows: oldStored[key] };
+        }
+      } else if (stored.version === 2) {
+        // NO-OP
+      }
+    } catch (err) {}
+    if (!stored) {
+      stored = {
+        version: 2,
+        data: {
+          default: {
+            "Cool Table": {
+              rows: []
+            }
+          }
+        }
+      };
+    }
+    this.stored = stored;
+    console.log(this.stored);
+
     document.addEventListener("keydown", e => {
       if (e.ctrlKey) {
         if (this.handleKeypress(e)) {
@@ -238,6 +308,11 @@ export default {
     });
   },
   methods: {
+    addWorkspace() {
+      this.stored.data[this.newWorkspace] = {};
+      this.newWorkspace = "";
+      this.save();
+    },
     newField() {
       this.rows.push({
         _id: Date.now(),
@@ -328,28 +403,15 @@ export default {
     },
     save() {
       console.log("Saving...");
-      let store;
-      try {
-        store = JSON.parse(localStorage.getItem("stored"));
-      } catch (err) {}
-      if (!store) {
-        localStorage.setItem("stored", "{}");
-        store = {};
-      }
-      store[this.title] = this.rows;
-      localStorage.setItem("stored", JSON.stringify(store));
+      this.stored.data[this.tempWorkspace][this.title] = { rows: this.rows };
+      localStorage.setItem("stored", JSON.stringify(this.stored));
+      // this.load();
     },
     load() {
-      let store;
-      try {
-        store = JSON.parse(localStorage.getItem("stored"));
-      } catch (err) {}
-      if (!store) {
-        localStorage.setItem("stored", "{}");
-        store = {};
-      }
-      let rows = store[this.newTitle];
-      this.rows = rows || [];
+      this.workspace = this.tempWorkspace;
+
+      let table = this.stored.data[this.workspace][this.newTitle];
+      this.rows = table ? table.rows : [];
       this.title = this.newTitle;
       this.newTitle = "";
     },
@@ -361,6 +423,16 @@ export default {
         return true;
       }
       return false;
+    },
+    calculateOrders() {
+      let rows = this.rows.filter(c => c.pk);
+      if (rows.length === 1) {
+        rows[0].traits.order = null;
+      } else if (rows.length >= 1) {
+        rows.forEach((row, i) => {
+          row.traits.order = i + 1;
+        });
+      }
     }
   },
   head: {
