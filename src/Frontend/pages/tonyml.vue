@@ -217,18 +217,6 @@ export default {
           },
           desc: "Toggles nullable for the current field."
         },
-        LeftArrow: {
-          func: () => {
-
-          },
-          desc: "Moves to the previous field."
-        },
-        RightArrow: {
-          func: () => {
-
-          },
-          desc: "Moves to the next field."
-        },
         ArrowUp: {
           func: (e) => {
             if (e.shiftKey) {
