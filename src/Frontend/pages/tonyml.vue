@@ -50,7 +50,7 @@
         <div class="field-group">
           <div class="input-field">
             <span>Field Name</span>
-            <input v-model="rows[currentIndex].name">
+            <input ref="fieldName" v-model="rows[currentIndex].name">
           </div>
           <div class="input-field">
             <span>Field Type</span>
@@ -217,20 +217,48 @@ export default {
           },
           desc: "Toggles nullable for the current field."
         },
-        v: {
+        LeftArrow: {
           func: () => {
-            this.currentIndex--;
-            if (this.currentIndex < 0) this.currentIndex = 0;
+
           },
           desc: "Moves to the previous field."
         },
-        b: {
+        RightArrow: {
           func: () => {
-            this.currentIndex++;
-            if (this.currentIndex > this.rows.length - 1)
-              this.currentIndex = this.rows.length - 1;
+
           },
           desc: "Moves to the next field."
+        },
+        ArrowUp: {
+          func: (e) => {
+            if (e.shiftKey) {
+              this.currentIndex--;
+              if (this.currentIndex < 0) this.currentIndex = 0;
+            } else {
+              if (this.currentIndex > 0) {
+                let [el] = this.rows.splice(this.currentIndex, 1);
+                this.rows.splice(this.currentIndex - 1, 0, el);
+                this.currentIndex--;
+              }
+            }
+          },
+          desc: 'Moves the current field up.'
+        },
+        ArrowDown: {
+          func: (e) => {
+            if (e.shiftKey) {
+              this.currentIndex++;
+              if (this.currentIndex > this.rows.length - 1)
+                this.currentIndex = this.rows.length - 1;
+            } else {
+              if (this.currentIndex < this.rows.length - 1) {
+                let [el] = this.rows.splice(this.currentIndex, 1);
+                this.rows.splice(this.currentIndex + 1, 0, el);
+                this.currentIndex++;
+              }
+            }
+          },
+          desc: 'Moves the current field down.'
         }
       }
     };
@@ -331,6 +359,10 @@ export default {
         }
       });
       this.currentIndex = this.rows.length - 1;
+      setTimeout(() => {
+        this.$refs.fieldName.focus();
+        this.$refs.fieldName.select();
+      }, 100);
     },
     removeCurrent() {
       let el = this.rows[this.currentIndex];
@@ -409,7 +441,7 @@ export default {
     },
     load() {
       this.workspace = this.tempWorkspace;
-
+      this.currentIndex = 0;
       let table = this.stored.data[this.workspace][this.newTitle];
       this.rows = table ? table.rows : [];
       this.title = this.newTitle;
@@ -418,13 +450,19 @@ export default {
     handleKeypress(e) {
       let el = this.rows[this.currentIndex];
 
+      console.log(e.key);
+
       if (this.hotkeys[e.key]) {
-        this.hotkeys[e.key].func();
+        this.hotkeys[e.key].func(e);
         return true;
       }
+      // console.log('Was not handled');
       return false;
     },
     calculateOrders() {
+      this.rows.forEach(c => {
+        if (!c.pk) c.traits.order = null;
+      });
       let rows = this.rows.filter(c => c.pk);
       if (rows.length === 1) {
         rows[0].traits.order = null;
