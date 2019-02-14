@@ -9,10 +9,6 @@
     </section>
 
     <section>
-      <div class="input-field">
-        <span>Table Name</span>
-        <input v-model="title" type="text">
-      </div>
       <div class="field-group">
         <div class="input-field">
           <span>Load Workspace</span>
@@ -37,7 +33,15 @@
           <button class="button flex no-margin" @click="addWorkspace">Add</button>
         </div>
       </div>
+      <div class="field-group">
+        <button class="button flex no-margin" @click="newTable">New Table</button>
+        <button class="button flex no-margin" @click="removeTable">Remove Table</button>
+      </div>
       <hr>
+      <div class="input-field">
+        <span>Table Name</span>
+        <input v-model="title" type="text">
+      </div>
       <div class="input-field">
         <span>Current Row</span>
         <select v-model="currentIndex" >
@@ -136,6 +140,15 @@
         <code>CTRL+{{ key }}</code>: <span>{{ hotkey.desc }}</span>
       </div>
     </section>
+
+    <section>
+      <h2>JSON</h2>
+      <h3>Export</h3>
+      <textarea v-model="jsonStored" readonly/>
+      <h3>Import</h3>
+      <textarea v-model="toImport"/>
+      <button class="button full" @click.prevent="importJson">Import</button>
+    </section>
     <br>
   </main>
 </template>
@@ -168,6 +181,7 @@ export default {
       title: "Cool Table",
       newTitle: "",
       currentIndex: 0,
+      toImport: "",
       stored: {
         data: {},
         version: 2
@@ -187,9 +201,7 @@ export default {
         },
         N: {
           func: () => {
-            this.title = "Cool Table";
-            this.rows = [];
-            this.newField();
+            this.newTable();
           },
           desc: "Creates a new table."
         },
@@ -255,6 +267,9 @@ export default {
     },
     currentPk() {
       return this.rows[this.currentIndex].pk;
+    },
+    jsonStored() {
+      return JSON.stringify(this.stored);
     }
   },
   watch: {
@@ -308,6 +323,32 @@ export default {
     });
   },
   methods: {
+    importJson() {
+      let toImport = JSON.parse(this.toImport);
+      if (!toImport) return;
+      switch (toImport.version) {
+        case 2: {
+          for (const wkey in toImport.data) {
+            if (!this.stored.data[wkey]) this.stored.data[wkey] = {};
+            const workspace = toImport.data[wkey];
+            for (const tkey in workspace) {
+              this.stored.data[wkey][tkey] = workspace[tkey];
+            }
+          }
+          break;
+        }
+      }
+    },
+    newTable() {
+      this.title = "Cool Table";
+      this.rows = [];
+      this.newField();
+    },
+    removeTable() {
+      console.log(this.title, this.stored.data);
+      delete this.stored.data[this.workspace][this.title];
+      this.newTable();
+    },
     addWorkspace() {
       this.stored.data[this.newWorkspace] = {};
       this.newWorkspace = "";
