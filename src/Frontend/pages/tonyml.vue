@@ -230,7 +230,7 @@ export default {
           desc: "Toggles nullable for the current field."
         },
         ArrowUp: {
-          func: (e) => {
+          func: e => {
             if (e.shiftKey) {
               this.currentIndex--;
               if (this.currentIndex < 0) this.currentIndex = 0;
@@ -242,10 +242,10 @@ export default {
               }
             }
           },
-          desc: 'Moves the current field up.'
+          desc: "Moves the current field up."
         },
         ArrowDown: {
-          func: (e) => {
+          func: e => {
             if (e.shiftKey) {
               this.currentIndex++;
               if (this.currentIndex > this.rows.length - 1)
@@ -258,7 +258,7 @@ export default {
               }
             }
           },
-          desc: 'Moves the current field down.'
+          desc: "Moves the current field down."
         }
       }
     };
@@ -339,6 +339,9 @@ export default {
     });
   },
   methods: {
+    addToast(text, time = 5000) {
+      this.$root.$emit("toast", text, time);
+    },
     importJson() {
       let toImport = JSON.parse(this.toImport);
       if (!toImport) return;
@@ -463,6 +466,7 @@ export default {
       }
     },
     save() {
+      this.addToast("Saved...");
       console.log("Saving...");
       this.stored.data[this.tempWorkspace][this.title] = { rows: this.rows };
       localStorage.setItem("stored", JSON.stringify(this.stored));
