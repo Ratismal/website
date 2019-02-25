@@ -1,0 +1,40 @@
+@mixin column($prefix) {
+  @for $i from 1 to 13 {
+    &.#{$prefix}#{$i} {
+      grid-column-end: span $i;
+      display: block;
+    }
+
+    &.offset-#{$prefix}#{$i} {
+      grid-column-start: $i + 1;
+    }
+  }
+  
+  &.#{$prefix}#{'0'} {
+    display: none;
+  }
+
+  &.#{$prefix} {
+    grid-column-start: auto;
+    grid-column-end: -1;
+  }
+}
+
+.fancy-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr) [end];
+
+  .col {
+    @media #{$small-screen} {
+      @include column('s');
+    }
+
+    @media #{$medium-screen} {
+      @include column('m');
+    }
+
+    @media #{$large-screen} {
+      @include column('l');
+    }
+  }
+}
