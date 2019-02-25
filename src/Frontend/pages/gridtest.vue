@@ -4,7 +4,7 @@
       <h1>Grid Test</h1>
       <p>Just testing grids</p>
 
-      <div class="fancy-grid">
+      <div class="catgrid">
         <span class="col s1">1 span column</span>
         <span class="col s1">1 span column</span>
         <span class="col s1">1 span column</span>
@@ -62,6 +62,41 @@
         <span class="col s6">column</span>
       </div>
 
+      <h2>weird flex but ok</h2>
+      <div class="catflex around">
+        <span>child</span>
+        <span>child</span>
+        <span>child</span>
+        <span>child</span>
+      </div>
+      <div class="catflex between center">
+        <span class="grow">child grow</span>
+        <span class="shrink">child shrink</span>
+        <span class="grow">child grow</span>
+        <span>child</span>
+      </div>
+      <div class="catflex vertical">
+        <span>child</span>
+        <span>child</span>
+        <span>child</span>
+        <span>child</span>
+      </div>
+      <div class="catflex horizontal vert-align">
+        <div class="catflex vertical">
+          <span class="title">Title</span>
+          <span class="content">Content</span>
+        </div>
+        <div class="catflex vertical">
+          <span class="title">Title</span>
+          <span class="content">Content</span>
+        </div>
+        <div class="catflex vertical">
+          <span class="title">Title</span>
+          <span class="content">Content</span>
+        </div>
+        <span>Wow!</span>
+        <span class="center">neat<br>o<br>!</span>
+      </div>
     </section>
   </main>
 </template>
@@ -75,27 +110,35 @@ export default {};
   margin: 1px;
 
   @each $size in (s, m, l) {
-    &.#{$size}1 {
+    &.#{$size}#{"1"} {
       background: red;
     }
-    &.#{$size}2 {
+    &.#{$size}#{"2"} {
       background: green;
     }
-    &.#{$size}3 {
+    &.#{$size}#{"3"} {
       background: blue;
     }
-    &.#{$size}4 {
+    &.#{$size}#{"4"} {
       background: orange;
     }
-    &.#{$size}6 {
+    &.#{$size}#{"6"} {
       background: purple;
     }
-    &.#{$size}8 {
+    &.#{$size}#{"8"} {
       background: cyan;
     }
-    &.#{$size}12 {
+    &.#{$size}#{"12"} {
       background: lime;
     }
   }
+}
+.catflex {
+  border: 1px white solid;
+  margin: 1rem 0;
+}
+.catflex > * {
+  background: red;
+  margin: 5px;
 }
 </style>

@@ -1,0 +1,49 @@
+.catflex {
+  display: flex;
+
+  &.vert-align {
+    align-items: center;
+  }
+
+  &.vert-baseline {
+    align-items: baseline;
+  }
+
+  &.inline {
+    display: inline-flex;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+  }
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  &.full {
+    width: 100%;
+  }
+
+  &.around {
+    justify-content: space-around;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+
+  & > * {
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    &.grow {
+      flex-grow: 1;
+    }
+
+    &.shrink {
+      flex-shrink: 1;
+    }
+  }
+}
