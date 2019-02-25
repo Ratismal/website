@@ -24,6 +24,10 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr) [end];
 
+  &.gap {
+    grid-gap: 1rem;
+  }
+
   .col {
     @media #{$small-screen} {
       @include column('s');

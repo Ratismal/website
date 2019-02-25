@@ -9,97 +9,91 @@
     </section>
 
     <section>
-      <div class="field-group">
-        <div class="input-field">
+      <div class="catgrid gap">
+        <div class="col s12 m6 catflex vertical">
           <span>Load Workspace</span>
           <select v-model="tempWorkspace">
             <option v-for="(ws, title) in stored.data" :key="title">{{ title }}</option>
           </select>
         </div>
-        <div class="input-field">
+
+        <div class="col s12 m6 catflex vertical">
           <span>Load Table</span>
           <select v-model="newTitle" @change="load">
             <option v-for="(table, title) in stored.data[tempWorkspace]" :key="title">{{ title }}</option>
           </select>
-        </div>          <!-- <button class="button flex no-margin" @click.prevent="load">Load</button> -->
-      </div>
+        </div>
 
-      <span>New Workspace</span>
-      <div class="field-group">
-        <div class="input-field">
-          <input v-model="newWorkspace" type="text">
+        <div class="col s12 m6 catflex vertical">
+          <span>New Workspace</span>
+          <input v-model="newWorkspace" class="col s12 m6" type="text">
         </div>
-        <div class="input-field">
-          <button class="button flex no-margin" @click="addWorkspace">Add</button>
-        </div>
-      </div>
-      <div class="field-group">
-        <button class="button flex no-margin" @click="newTable">New Table</button>
-        <button class="button flex no-margin" @click="removeTable">Remove Table</button>
+        <button class="col s12 m6 button no-margin" @click="addWorkspace">Add Workspace</button>
+        <button class="col s12 m6 button no-margin" @click="newTable">New Table</button>
+        <button class="col s12 m6 button no-margin" @click="removeTable">Remove Table</button>
       </div>
       <hr>
-      <div class="input-field">
-        <span>Table Name</span>
-        <input v-model="title" type="text">
+      <div class="catgrid gap">
+        <div class="col s12 m6 catflex vertical">
+          <span>Table Name</span>
+          <input v-model="title" type="text">
+        </div>
+
+        <div class="col s12 m6 catflex vertical">
+          <span>Current Row</span>
+          <select v-model="currentIndex" >
+            <option v-for="row in rows" :key="row._id" :value="rows.indexOf(row)">
+              {{ row.name }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="input-field">
-        <span>Current Row</span>
-        <select v-model="currentIndex" >
-          <option v-for="row in rows" :key="row._id" :value="rows.indexOf(row)">
-            {{ row.name }}
-          </option>
-        </select>
-      </div>
-      <div v-if="rows[currentIndex]">
-        <div class="field-group">
-          <div class="input-field">
-            <span>Field Name</span>
-            <input ref="fieldName" v-model="rows[currentIndex].name">
-          </div>
-          <div class="input-field">
-            <span>Field Type</span>
-            <input v-model="rows[currentIndex].type">
-          </div>
+      <br>
+      <div v-if="rows[currentIndex]" class="catgrid gap">
+        <div class="col s12 m6 catflex vertical">
+          <span>Field Name</span>
+          <input ref="fieldName" v-model="rows[currentIndex].name">
         </div>
-        <div class="field-group">
-          <div class="input-field">
-            <span>Primary Key</span>
-            <input v-model="rows[currentIndex].pk" type="checkbox">
-          </div>
-          <div class="input-field">
-            <span>Foreign Key Key</span>
-            <input v-model="rows[currentIndex].fk" type="checkbox">
-          </div>
-          <div class="input-field">
-            <span>Nullable</span>
-            <input v-model="rows[currentIndex].nullable" type="checkbox">
-          </div>
+
+        <div class="col s12 m6 catflex vertical">
+          <span>Field Type</span>
+          <input v-model="rows[currentIndex].type">
         </div>
-        <div class="field-group">
-          <div class="input-field">
-            <span>Size</span>
-            <input v-model="rows[currentIndex].traits.size">
-          </div>
-          <!-- <div class="input-field">
-            <span>Order</span>
-            <input v-model="rows[currentIndex].traits.order">
-          </div> -->
-          <div class="input-field">
-            <span>References</span>
-            <input v-model="rows[currentIndex].traits.references">
-          </div>
+
+        <div class="col s4 catflex vertical">
+          <span>Primary Key</span>
+          <input v-model="rows[currentIndex].pk" type="checkbox">
         </div>
-        <div class="field-group">
-          <div class="input-field">
-            <span>Identity Start</span>
-            <input v-model="rows[currentIndex].traits.start">
-          </div>
-          <div class="input-field">
-            <span>Identity Increment</span>
-            <input v-model="rows[currentIndex].traits.increment">
-          </div>
+        <div class="col s4 catflex vertical">
+          <span>Foreign Key Key</span>
+          <input v-model="rows[currentIndex].fk" type="checkbox">
         </div>
-        <div class="input-field">
+        <div class="col s4 catflex vertical">
+          <span>Nullable</span>
+          <input v-model="rows[currentIndex].nullable" type="checkbox">
+        </div>
+
+        <div class="col s12 m6 catflex vertical">
+          <span>Size</span>
+          <input v-model="rows[currentIndex].traits.size">
+        </div>
+
+        <div class="col s12 m6 catflex vertical">
+          <span>References</span>
+          <input v-model="rows[currentIndex].traits.references">
+        </div>
+
+        <div class="col s12 m6 catflex vertical">
+          <span>Identity Start</span>
+          <input v-model="rows[currentIndex].traits.start">
+        </div>
+
+        <div class="col s12 m6 catflex vertical">
+          <span>Identity Increment</span>
+          <input v-model="rows[currentIndex].traits.increment">
+        </div>
+
+        <div class="col s12 catflex vertical">
           <span>Additional Constraints</span>
           <input v-model="rows[currentIndex].traits.additional">
         </div>
@@ -107,9 +101,10 @@
       <div v-else>
         there's nothing here, try adding a new row ok
       </div>
-      <div class="field-group">
-        <button class="button flex" @click.prevent="newField">New Field</button>
-        <button class="button flex" @click.prevent="removeCurrent">Remove Current</button>
+      <br>
+      <div class="catgrid gap">
+        <button class="col s12 m6 button no-margin" @click.prevent="newField">New Field</button>
+        <button class="col s12 m6 button no-margin" @click.prevent="removeCurrent">Remove Current</button>
       </div>
     </section>
     <br>
