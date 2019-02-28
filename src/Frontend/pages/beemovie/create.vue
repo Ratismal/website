@@ -156,9 +156,6 @@ export default {
                 type: 0
             });
             this.currentIndex = this.rows.length - 1;
-            this.temp.content = '';
-            this.temp.actor = '';
-            this.temp.system = false;
             this.$root.$emit("toast", 'Added a new line', 2000);
 
             setTimeout(() => {
