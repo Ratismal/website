@@ -28,7 +28,7 @@
             </div>
             <div class="col s12 catflex vertical">
               <label>Content</label>
-              <input v-model="currentRow.content">
+              <textarea v-model="currentRow.content" rows="10"/>
             </div>
             <div class="col s12 catflex vertical">
               <button class="button full" @click.prevent="addLine">New Line</button>
@@ -211,8 +211,10 @@ export default {
 
 .export {
     max-height: 100px !important;
-    resize: none;
-    overflow-y: scroll;
+}
+
+textarea {
     min-height: 0;
+    resize: none;
 }
 </style>
