@@ -3,52 +3,76 @@
     <section>
       <h1>Script Transcriber</h1>
     </section>
-    <section>
-      <div class="catgrid gap">
-        <div ref="lineWrapper" class="col s12 m4 line-wrapper">
-          <div v-for="row in currentRows" :key="row.i" :class="{line: true, catflex: true, vertical: true, selected: row === currentRow}" @click.prevent="selectRow(row)">
-            <div class="id">Row #{{ row.i }}</div>
-            <div class="actor">{{ !row.type ? row.actor : types[row.type] }}</div>
-            <div class="content">{{ row.content }}</div>
-          </div>
+    <div class="catgrid gap">
+      <div ref="lineWrapper" class="col s12 m3 line-wrapper">
+        <div v-for="row in currentRows" :key="row.i" :class="{line: true, catflex: true, vertical: true, selected: row === currentRow}" @click.prevent="selectRow(row)">
+          <div class="id">Row #{{ row.i }}</div>
+          <div class="actor">{{ !row.type ? row.actor : types[row.type] }}</div>
+          <div class="content">{{ row.content }}</div>
         </div>
+      </div>
 
-        <div class="col s12 m8">
-          <div class="catgrid gap">
-            <div class="col s12">
-              <span>Row #{{ currentRow.i }}</span>
+      <div class="col s12 m6 editor-wrapper">
+        <div class="catgrid gap">
+          <div class="col s12">
+            <span>Row #{{ currentRow.i }}</span>
+          </div>
+          <div class="col s12 m6 catflex vertical">
+            <label>Actor Name</label>
+            <input v-model="currentRow.actor" :disabled="currentRow.system">
+          </div>
+          <div class="col s12 m6 catflex vertical">
+            <label>Actor Type</label>
+            <select v-model="currentRow.type" class="full">
+              <option v-for="(t, i) in types" :key="i" :value="i">
+                {{ t }}
+              </option>
+            </select>
+          </div>
+          <div class="col s12 catflex vertical">
+            <label>Content</label>
+            <textarea v-model="currentRow.content" rows="10"/>
+          </div>
+          <div class="col s12 catflex vertical">
+            <div class="catflex horizontal">
+              <button class="button grow" @click.prevent="addLine">New Line</button>
+              <button class="button danger grow" @click.prevent="removeLine">Remove Line</button>
             </div>
-            <div class="col s12 m6 catflex vertical">
-              <label>Actor Name</label>
-              <input v-model="currentRow.actor" :disabled="currentRow.system">
-            </div>
-            <div class="col s12 m6 catflex vertical">
-              <label>Actor Type</label>
-              <select v-model="currentRow.type" class="full">
-                <option v-for="(t, i) in types" :key="i" :value="i">
-                  {{ t }}
-                </option>
-              </select>
-            </div>
-            <div class="col s12 catflex vertical">
-              <label>Content</label>
-              <textarea v-model="currentRow.content" rows="10"/>
-            </div>
-            <div class="col s12 catflex vertical">
-              <button class="button full" @click.prevent="addLine">New Line</button>
-              <button class="button full danger" @click.prevent="removeLine">Remove Line</button>
-              <button class="button full" @click.prevent="save">Save</button>
-            </div>
-            <div class="col s12">
-              <textarea ref="exportText" v-model="exportText" class="export" rows="10" readonly @click.prevent="copy"/>
-            </div>
+            <button class="button full" @click.prevent="save">Save</button>
+          </div>
+          <div class="col s12">
+            <textarea ref="exportText" v-model="exportText" class="export" rows="10" readonly @click.prevent="copy"/>
           </div>
         </div>
-    </div></section>
+      </div>
+
+      <div class="col s12 m3 catflex vertical">
+        <div class="script">
+          <span v-for="(line, i) in currentScript" :key="i">{{ line }}</span>
+        </div>
+        <div class="catflex horizontal">
+          <button class="button grow" @click.prevent="changePage(false)">Prev</button>
+          <input v-model="scriptPage" class="pager" type="number">
+          <button class="button grow" @click.prevent="changePage(true)">Next</button>
+        </div>
+        <div class="catflex horizontal around">
+          <div class="catflex vertical">
+            <label>Lines per Page</label>
+            <input v-model="linesPerPage" type="number" class="pager">
+          </div>
+          <div class="catflex vertical">
+            <label>Total Pages</label>
+            <input v-model="scriptPages" type="number" class="pager" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
 <script>
+import beemovie from "~/assets/json/beemovie.json";
+
 export default {
   data() {
     return {
@@ -56,6 +80,9 @@ export default {
       i: 0,
       currentIndex: 0,
       types: ["NORMAL", "SYSTEM", "TECHNICAL", "ACTION"],
+      beemovie,
+      scriptPage: 0,
+      linesPerPage: 12,
       hotkeys: {
         s: {
           func: () => {
@@ -99,6 +126,27 @@ export default {
             type: 0
           };
       }
+    },
+    currentScript: {
+      get() {
+        return this.beemovie.slice(
+          this.scriptPage * this.linesPerPage,
+          this.scriptPage * this.linesPerPage + this.linesPerPage
+        );
+      }
+    },
+    scriptPages: {
+      get() {
+        return Math.ceil(this.beemovie.length / this.linesPerPage);
+      }
+    }
+  },
+  watch: {
+    scriptPage(value) {
+      localStorage.setItem("script-page", value);
+    },
+    linesPerPage(value) {
+      localStorage.setItem("script-lpp", value);
     }
   },
   mounted() {
@@ -126,6 +174,11 @@ export default {
           this.i = this.rows.length - 1;
         }
 
+        if (localStorage.getItem("script-page"))
+          this.scriptPage = parseInt(localStorage.getItem("script-page")) || 0;
+        if (localStorage.getItem("script-lpp"))
+          this.linesPerPage = parseInt(localStorage.getItem("script-lpp")) || 0;
+
         this.save();
       } catch (err) {}
 
@@ -139,7 +192,14 @@ export default {
       });
     }
   },
+
   methods: {
+    changePage(next = true) {
+      this.scriptPage = Math.max(
+        0,
+        Math.min(this.beemovie.length - 1, this.scriptPage + (next ? 1 : -1))
+      );
+    },
     handleKeypress(e) {
       if (this.hotkeys[e.key]) {
         this.hotkeys[e.key].func(e);
@@ -233,6 +293,15 @@ export default {
   }
 }
 
+.script {
+  white-space: pre-wrap;
+  span {
+    display: block;
+    margin: 0.5rem 0;
+    padding: 0;
+  }
+}
+
 .export {
   max-height: 100px !important;
 }
@@ -240,5 +309,15 @@ export default {
 textarea {
   min-height: 0;
   resize: none;
+}
+
+.editor-wrapper {
+  padding: 1rem;
+}
+
+.pager {
+  flex: 0 0 auto;
+  max-width: 100px;
+  display: block;
 }
 </style>
