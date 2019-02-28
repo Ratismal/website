@@ -31,7 +31,7 @@
           </div>
           <div class="col s12 catflex vertical">
             <label>Content</label>
-            <textarea v-model="currentRow.content" rows="10"/>
+            <textarea ref="contentInput" v-model="currentRow.content" rows="10"/>
           </div>
           <div class="col s12 catflex vertical">
             <div class="catflex horizontal">
@@ -48,7 +48,7 @@
 
       <div class="col s12 m4 catflex vertical">
         <div class="script">
-          <span v-for="(line, i) in currentScript" :key="i">{{ line }}</span>
+          <span v-for="(line, i) in currentScript" :key="i" @click.prevent="copyText(line)">{{ line }}</span>
         </div>
         <div class="catflex horizontal">
           <button class="button grow" @click.prevent="changePage(false)">Prev</button>
@@ -254,6 +254,10 @@ export default {
       this.$refs.exportText.select();
       // document.execCommand('copy');
       // this.$root.$emit("toast", 'Copied JSON to clipboard', 2000);
+    },
+    copyText(text) {
+      this.currentRow.content += text + " ";
+      this.$refs.contentInput.focus();
     }
   }
 };
