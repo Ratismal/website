@@ -8,7 +8,7 @@
         <div ref="lineWrapper" class="col s12 m4 line-wrapper">
           <div v-for="row in currentRows" :key="row.i" :class="{line: true, catflex: true, vertical: true, selected: row === currentRow}" @click.prevent="selectRow(row)">
             <div class="id">Row #{{ row.i }}</div>
-            <div class="actor">{{ row.type == 3 ? 'ACTION' : row.type == 2 ? 'TECHNICAL' : row.type == 1 ? 'SYSTEM' : row.actor }}</div>
+            <div class="actor">{{ !row.type ? row.actor : types[row.type] }}</div>
             <div class="content">{{ row.content }}</div>
           </div>
         </div>
@@ -60,6 +60,12 @@ export default {
             rows: [{}],
             i: 0,
             currentIndex: 0,
+            types: [
+                'NORMAL',
+                'SYSTEM',
+                'TECHNICAL',
+                'ACTION'
+            ],
             hotkeys: {
                 s: {
                     func: () => {
@@ -109,8 +115,8 @@ export default {
                     let i = 0;
                     this.rows.forEach(r => {
                         r.i = i++;
-                        if (r.system) {
-                            r.type = 1;
+                        if (r.system !== undefined) {
+                            r.type = r.system ? 1 : 0;
                             r.system = undefined;
                         }
                     });
