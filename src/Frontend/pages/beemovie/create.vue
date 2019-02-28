@@ -36,6 +36,7 @@
             </div>
             <div class="col s12 catflex vertical">
               <button class="button full" @click.prevent="addLine">New Line</button>
+              <button class="button full danger" @click.prevent="removeLine">Remove Line</button>
               <button class="button full" @click.prevent="save">Save</button>
             </div>
             <div class="col s12">
@@ -89,7 +90,14 @@ export default {
     },
     currentRow: {
       get() {
-        return this.rows[this.currentIndex];
+        if (this.rows[this.currentIndex]) return this.rows[this.currentIndex];
+        else
+          return {
+            i: 0,
+            content: "Something is wrong. There's nothing here.",
+            actor: "Uh Oh",
+            type: 0
+          };
       }
     }
   },
@@ -144,21 +152,27 @@ export default {
       if (this.system) {
         this.actorInput = "SYSTEM";
       }
-      this.rows.push({
+      const row = {
         i: ++this.i,
         content: "",
         actor: "",
         type: 0
-      });
-      this.currentIndex = this.rows.length - 1;
+      };
+      this.rows.splice(this.currentIndex + 1, 0, row);
+      this.currentIndex++;
       this.$root.$emit("toast", "Added a new line", 2000);
 
-      setTimeout(() => {
-        let el = this.$refs.lineWrapper;
-        el.scrollTop = el.scrollHeight;
-      }, 100);
+      //   setTimeout(() => {
+      //     let el = this.$refs.lineWrapper;
+      //     el.scrollTop = el.scrollHeight;
+      //   }, 100);
     },
-    removeLine() {},
+    removeLine() {
+      this.rows.splice(this.currentIndex, 1);
+      if (this.currentIndex >= this.rows.length)
+        this.currentIndex = this.rows.length - 1;
+      this.$root.$emit("toast", "Removed a new line", 2000);
+    },
     selectRow(row) {
       let index = this.rows.indexOf(row);
       if (typeof index === "number") this.currentIndex = index;
