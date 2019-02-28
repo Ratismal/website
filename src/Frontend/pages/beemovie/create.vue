@@ -220,6 +220,10 @@ export default {
     .actor {
         font-size: 1.6em;
     }
+
+    .content {
+        white-space: pre-wrap;
+    }
 }
 
 .export {
