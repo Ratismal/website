@@ -303,10 +303,15 @@ export default {
 
 .script {
   white-space: pre-wrap;
+
   span {
     display: block;
     margin: 0.5rem 0;
     padding: 0;
+    transition-duration: 0.1s;
+    &:hover {
+      color: rgb(87, 241, 195);
+    }
   }
 }
 
