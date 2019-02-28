@@ -8,7 +8,7 @@
         <div ref="lineWrapper" class="col s12 m4 line-wrapper">
           <div v-for="row in currentRows" :key="row.i" :class="{line: true, catflex: true, vertical: true, selected: row === currentRow}" @click.prevent="selectRow(row)">
             <div class="id">Row #{{ row.i }}</div>
-            <div class="actor">{{ row.system ? 'SYSTEM' : row.actor }}</div>
+            <div class="actor">{{ row.type == 3 ? 'ACTION' : row.type == 2 ? 'TECHNICAL' : row.type == 1 ? 'SYSTEM' : row.actor }}</div>
             <div class="content">{{ row.content }}</div>
           </div>
         </div>
@@ -23,8 +23,18 @@
               <input v-model="currentRow.actor" :disabled="currentRow.system">
             </div>
             <div class="col s12 m6 catflex vertical vert-align">
-              <label>System Actor</label>
-              <input v-model="currentRow.system" type="checkbox">
+              <div>
+                <label>System</label>
+                <input v-model="currentRow.type" value="1" type="radio">
+              </div>
+              <div>
+                <label>Technical</label>
+                <input v-model="currentRow.type" value="2" type="radio">
+              </div>
+              <div>
+                <label>Action</label>
+                <input v-model="currentRow.type" value="3" type="radio">
+              </div>
             </div>
             <div class="col s12 catflex vertical">
               <label>Content</label>
@@ -47,17 +57,7 @@
 export default {
     data() {
         return {
-            rows: [{
-                i: 0,
-                content: '',
-                actor: '',
-                system: false
-            }],
-            temp: {
-                content: '',
-                actor: '',
-                system: false
-            },
+            rows: [{}],
             i: 0,
             currentIndex: 0,
             hotkeys: {
@@ -72,6 +72,12 @@ export default {
                         this.addLine();
                     },
                     desc: "Adds a new field to the table."
+                },
+                t: {
+                    func: () => {
+                        this.currentRow.type = (this.currentRow.type + 1) % 4;
+                    },
+                    desc: 'aaa'
                 }
             },
             exportText: ''
@@ -85,9 +91,7 @@ export default {
         },
         currentRow: {
             get() {
-                if (this.rows[this.currentIndex])
                 return this.rows[this.currentIndex];
-                else return this.temp;
             }
         }
     },
@@ -99,11 +103,17 @@ export default {
                     i: 0,
                     content: '',
                     actor: '',
-                    system: false
+                    type: 0
                 }];
                 else {
                     let i = 0;
-                    this.rows.forEach(r => r.i = i++);
+                    this.rows.forEach(r => {
+                        r.i = i++;
+                        if (r.system) {
+                            r.type = 1;
+                            r.system = undefined;
+                        }
+                    });
                     this.i = this.rows.length - 1;
                 }
 
@@ -137,7 +147,7 @@ export default {
                 i: ++this.i,
                 content: '',
                 actor: '',
-                system: false
+                type: 0
             });
             this.currentIndex = this.rows.length - 1;
             this.temp.content = '';
