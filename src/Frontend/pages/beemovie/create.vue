@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="col s12 m6 editor-wrapper">
+      <div class="col s12 m5 editor-wrapper">
         <div class="catgrid gap">
           <div class="col s12">
             <span>Row #{{ currentRow.i }}</span>
@@ -46,7 +46,7 @@
         </div>
       </div>
 
-      <div class="col s12 m3 catflex vertical">
+      <div class="col s12 m4 catflex vertical">
         <div class="script">
           <span v-for="(line, i) in currentScript" :key="i">{{ line }}</span>
         </div>
