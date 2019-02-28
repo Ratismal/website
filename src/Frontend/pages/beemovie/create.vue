@@ -48,7 +48,7 @@
 
       <div class="col s12 m4 catflex vertical">
         <div class="script">
-          <span v-for="(line, i) in currentScript" :key="i" @click.prevent="copyText(line)">{{ line }}</span>
+          <span v-for="(line, i) in currentScript" :key="i" @click.prevent="copyText">{{ line }}</span>
         </div>
         <div class="catflex horizontal">
           <button class="button grow" @click.prevent="changePage(false)">Prev</button>
@@ -255,8 +255,12 @@ export default {
       // document.execCommand('copy');
       // this.$root.$emit("toast", 'Copied JSON to clipboard', 2000);
     },
-    copyText(text) {
-      this.currentRow.content += text + " ";
+    copyText(event) {
+      console.log(event);
+      let text = event.target.innerText;
+      if (event.ctrlKey) {
+        this.currentRow.actor = text;
+      } else this.currentRow.content += text + " ";
       this.$refs.contentInput.focus();
     }
   }
