@@ -67,7 +67,7 @@ export default {
         },
         g: {
           func: () => {
-            this.gotoIndex = this.currentIndex;
+            this.gotoIndex = this.currentIndex + 1;
             this.gotoEnabled = true;
           },
           desc: "Go To"
@@ -159,7 +159,7 @@ export default {
     },
     gotoModal() {
       this.gotoEnabled = false;
-      this.goto(this.gotoIndex);
+      this.goto(this.gotoIndex - 1);
     }
   },
   head: {
