@@ -176,8 +176,8 @@ export default {
   padding: 1rem;
   margin: 0.5rem 0;
   border-radius: 8px;
-  width: 600px;
-  height: 150px;
+  width: 700px;
+  height: 200px;
 
   transition: 1s ease;
   // transition: transform 0.3s ease-in-out, opacity 0.5s;
