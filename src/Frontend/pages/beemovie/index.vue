@@ -108,6 +108,12 @@ export default {
           // console.log("Preventing default.");
           e.preventDefault();
         }
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        this.move(false);
+        e.preventDefault();
+      } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        this.move(true);
+        e.preventDefault();
       }
     });
   },
@@ -155,6 +161,10 @@ export default {
       this.gotoEnabled = false;
       this.goto(this.gotoIndex);
     }
+  },
+  head: {
+    title: "Bee Movie Script",
+    link: [{ rel: "icon", type: "image/x-icon", href: "/img/thinkingBEE.png" }]
   }
 };
 </script>

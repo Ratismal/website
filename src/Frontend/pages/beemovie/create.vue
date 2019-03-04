@@ -263,6 +263,10 @@ export default {
       } else this.currentRow.content += text + " ";
       this.$refs.contentInput.focus();
     }
+  },
+  head: {
+    title: "Script Transcriber",
+    link: [{ rel: "icon", type: "image/x-icon", href: "/img/thinkingBEE.png" }]
   }
 };
 </script>
