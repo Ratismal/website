@@ -67,13 +67,15 @@
         </div>
       </div>
     </div>
+    <heck-mobile/>
   </main>
 </template>
 
 <script>
 import beemovie from "~/assets/json/beemovie.json";
-
+import HeckMobile from "~/components/HeckMobile.vue";
 export default {
+  components: { HeckMobile },
   data() {
     return {
       rows: [{}],

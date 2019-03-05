@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'flex';
+@import 'grid';
+
+@media #{$small-screen-only} {
+  .hide-s,
+  .only-m,
+  .only-l {
+    display: none;
+  }
+}
+
+@media #{$medium-screen-only} {
+  .hide-m,
+  .only-s,
+  .only-l {
+    display: none;
+  }
+}
+
+@media #{$large-screen-only} {
+  .hide-l,
+  .only-s,
+  .only-m {
+    display: none;
+  }
+}

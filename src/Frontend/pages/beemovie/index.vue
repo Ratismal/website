@@ -15,10 +15,10 @@
       <div class="button-bar-inner-wrap catgrid">
         <button class="button col s6" @click.prevent="move(false)">Previous</button>
         <button class="button col s6" @click.prevent="move(true)">Next</button>
-        <span class="col s2 center">
+        <span class="col s4 m2 center">
           {{ currentIndex + 1 }} / {{ lines.length }}
         </span>
-        <progress :max="lines.length" :value="currentIndex" class="script-progress col s10">
+        <progress :max="lines.length" :value="currentIndex" class="script-progress col s8 m10">
           {{ Math.floor(lines.length / (currentIndex + 1)) }}%
         </progress>
       </div>
@@ -27,14 +27,16 @@
       <input v-model="gotoIndex" type="number">
       <button class="button" @click.prevent="gotoModal">Go</button>
     </div>
+    <heck-mobile/>
   </main>
 </template>
 
 <script>
 import beemovie from "~/assets/json/formattedBeemovie.json";
-import { setTimeout } from "timers";
+import HeckMobile from "~/components/HeckMobile.vue";
 
 export default {
+  components: { HeckMobile },
   data() {
     let i = 0;
     beemovie.forEach(l => (l.key = ++i));
@@ -254,8 +256,24 @@ export default {
   }
 }
 
+.line-wrapper {
+  position: absolute;
+  // // top: -9999px;
+  // // left: -9999px;
+  // // bottom: -9999px;
+  // // right: -9999px;
+  // // width: 100%;
+  top: -100%;
+  bottom: -100%;
+  margin: auto;
+  // margin: 0 auto 50% auto;
+  height: 100vh;
+  // transform: translateY(-50%);
+}
+
 .content-wrapper {
-  height: 100%;
+  position: relative;
+  height: 100vh;
   perspective: 800px;
   overflow: hidden;
 }
@@ -295,5 +313,15 @@ export default {
   background: black;
   border-radius: 8px;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+  .line {
+    width: 300px;
+  }
+
+  .button-bar .button-bar-inner-wrap {
+    width: 300px;
+  }
 }
 </style>
