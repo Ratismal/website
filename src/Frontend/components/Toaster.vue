@@ -78,6 +78,8 @@ export default {
   height: 100%;
   flex-direction: column;
   justify-content: flex-end;
+  user-select: none;
+  pointer-events: none;
 }
 
 .toast {
