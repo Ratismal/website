@@ -14,7 +14,7 @@ module.exports = {
       { name: 'keywords', content: 'stupid cat, kirkland morrill, ratismal' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: "icon", type: "image/x-icon", href: "/img/avatars/31.png" }
     ],
 
     script: [

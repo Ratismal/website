@@ -45,9 +45,7 @@
 
       <p>I've worked at
         <a href="https://policywise.com/">PolicyWise for Children & Families</a>
-        for the past two years as a summer student, and am fortunate enough to be contracted
-        <!-- -->
-        part-time through school to continue my work.</p>
+        for the past two years as a summer student, and am still currently contracted on an as-needed basis.</p>
       <p>Additionally, I've created and maintain several projects, most of which are
         <a href="https://github.com/ratismal">open-source</a>. This website is
       <a href="https://github.com/ratismal/website">one of them</a>!</p>
