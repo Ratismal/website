@@ -2,9 +2,9 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const { Nuxt, Builder } = require('nuxt');
 const nuxtConfig = require('../../nuxt.config.js');
-const Security = require('./Security');
+const Security = require('../Backend/Security');
 
-const ApiRoute = require('./routes/api');
+const ApiRoute = require('../Backend/routes/api');
 
 class Frontend {
   constructor(backend) {
@@ -44,7 +44,7 @@ class Frontend {
       await next();
     });
 
-    this.apiRoute = new ApiRoute(this);
+
 
     this.app.use(async (ctx, next) => {
       if (!ctx.path.startsWith('/api')) {
@@ -59,6 +59,14 @@ class Frontend {
     });
 
     this.server = null;
+
+
+    this.app.use(async (ctx, next) => {
+      ctx.status = 404;
+      return next();
+    });
+    this.apiRoute = new ApiRoute(this, 'api');
+    this.apiRoute.hook(this.app);
   }
 
   start() {

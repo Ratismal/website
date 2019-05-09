@@ -1,43 +1,23 @@
-const Router = require('koa-router');
+const Route = require('./route');
 
-module.exports = class ApiRoute {
-  constructor(frontend) {
-    this.frontend = frontend;
-
-    this.router = new Router({
-      prefix: '/api'
-    });
-
-    this.router.param('id', async (id, ctx, next) => {
-      ctx.state.id = id;
-      await next();
-    });
-
-    this.router.get('/', async (ctx, next) => {
-      ctx.body = 'Hello, world!';
-    });
-
-    this.router.get('/dnd/character/:id', this.getDndCharacter.bind(this));
-    this.router.post('/dnd/character/:id', this.setDndCharacter.bind(this));
-
-    this.frontend.app.use(this.router.routes()).use(this.router.allowedMethods());
+module.exports = class DndRoute extends Route {
+  get prefix() {
+      return '/dnd';
   }
 
-  get backend() {
-    return this.frontend.backend;
-  }
-
-  get db() {
-    return this.backend.db;
+  setup() {
+    this.router.get('/character/:id', this.getDndCharacter.bind(this));
+    this.router.post('/character/:id', this.setDndCharacter.bind(this));
   }
 
   async getDndCharacter(ctx, next) {
     const char = await this.db.dnd_character.findByPk(ctx.state.id);
+    ctx.assert(char, 404, 'A character was not found');
+
     let values = char.dataValues;
     if (!ctx.state.auth || char.ownerId !== ctx.state.auth.id) {
       values.notes = '[REDACTED]';
     }
-    ctx.assert(char, 404, 'A character was not found');
     ctx.body = char.dataValues;
   }
 

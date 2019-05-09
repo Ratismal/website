@@ -1,0 +1,71 @@
+.calendar {
+
+  .month {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    font-size: 1.2em;
+  }
+
+  .days {
+    display: grid;
+    grid-template-columns: [sunday] 1fr [monday] 1fr [tuesday] 1fr [wednesday] 1fr [thursday] 1fr [friday] 1fr [saturday] 1fr [end];
+
+    & .day {
+      border: 1px white solid;
+      padding: 0.5rem;
+      height: 5rem;
+      text-align: right;
+      box-sizing: border-box;
+
+
+      &.otherMonth {
+        opacity: 0.75;
+      }
+
+      &.weekend {
+        opacity: 0.3;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      &.selected {
+        border: 2px rgba(200, 20, 20, 0.9) solid;
+      }
+
+      &.hasValue {
+        background: rgba(20, 200, 20, 0.1);
+
+        &:hover {
+          background: rgba(20, 200, 20, 0.2) !important;
+        }
+
+        &.selected {
+          border: 2px rgba(20, 200, 20, 0.9) solid;
+        }
+      }
+
+      &:not(.weekend) {
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+}
+
+.segment {
+  margin: 0.5rem 0;
+
+  label {
+    margin: 0.5rem 0;
+  }
+
+  textarea {
+    resize: none;
+    min-height: initial;
+    font-size: 1.2rem;
+    font-family: 'ubuntu mono';
+  }
+}

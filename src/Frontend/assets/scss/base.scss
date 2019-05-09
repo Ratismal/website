@@ -68,6 +68,12 @@ footer {
   text-align: center;
 }
 
+.full {
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
 .button {
   outline: none;
   border: none;
@@ -79,10 +85,6 @@ footer {
 
   &.no-margin {
     margin: 0;
-  }
-
-  &.full {
-    width: 100%;
   }
 
   &:hover {
