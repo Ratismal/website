@@ -79,6 +79,10 @@
     font-size: 1.2rem;
     font-family: 'ubuntu mono';
   }
+
+  pre {
+    white-space: pre-wrap;
+  }
 }
 
 .entry /deep/ .icon-link {
