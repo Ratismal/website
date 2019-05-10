@@ -255,11 +255,11 @@ export default {
     formatPreview(text) {
       return text
         .replace(
-          /\!([A-Z]+-\d+)/,
+          /\!([A-Z]+-\d+)/g,
           '<a href="https://granify.atlassian.net/browse/$1" class="icon-link"><img class="icon" src="/img/worklog/jira.png">$1</a>'
         )
         .replace(
-          /!([A-z\-]+)\#(\d+)/,
+          /!([A-z\-]+)\#(\d+)/g,
           '<a href="https://github.com/granify/$1/issues/$2" class="icon-link"><img class="icon" src="/img/worklog/github.png">$1#$2</a>'
         );
     }
