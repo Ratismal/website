@@ -73,6 +73,9 @@
   textarea {
     resize: none;
     min-height: initial;
+  }
+
+  textarea, pre {
     font-size: 1.2rem;
     font-family: 'ubuntu mono';
   }
