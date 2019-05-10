@@ -28,7 +28,7 @@
           </div>
         </div>
         <div v-if="dayView.date" class="entry">
-          <div class="catflex vertical">
+          <div ref="entry" class="catflex vertical">
             <div v-for="(v, k) in dayView.data" :key="k" class="catflex vertical segment">
               <label>{{ k }}</label>
               <textarea
@@ -50,6 +50,7 @@
 
 <script>
 import moment from "moment";
+import { setTimeout } from "timers";
 
 export default {
   data() {
@@ -171,6 +172,13 @@ export default {
       day.class.selected = true;
 
       this.dayView.data = await this.getDay(day.formatted);
+
+      setTimeout(() => {
+        for (const el of this.$refs.entry.querySelectorAll("textarea")) {
+          el.style.height = "";
+          el.style.height = el.scrollHeight + 3 + "px";
+        }
+      }, 0);
     },
 
     defaultDay() {
