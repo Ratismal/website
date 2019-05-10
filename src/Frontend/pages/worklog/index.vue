@@ -28,20 +28,37 @@
           </div>
         </div>
         <div v-if="dayView.date" class="entry">
-          <div ref="entry" class="catflex vertical">
-            <div v-for="(v, k) in dayView.data" :key="k" class="catflex vertical segment">
-              <label>{{ k }}</label>
-              <textarea
-                v-model="dayView.data[k]"
-                oninput="this.style.height = '';this.style.height = this.scrollHeight + 3 + 'px'"
-              />
-            </div>
-          </div>
           <button
             class="button full"
-            @click.prevent="setDay(dayView.date.formatted, dayView.data)"
-          >Save</button>
-          <span v-if="dayView.error" class="center full red-text lighten-2=text">{{ dayView.error }}</span>
+            @click.prevent="toggleEdit"
+          >{{ dayView.editing ? 'Enter View Mode' : 'Enter Edit Mode' }}</button>
+          <template v-if="dayView.editing">
+            <div ref="entry" class="catflex vertical">
+              <div v-for="(v, k) in dayView.data" :key="k" class="catflex vertical segment">
+                <label>{{ k }}</label>
+                <textarea
+                  v-model="dayView.data[k]"
+                  oninput="this.style.height = '';this.style.height = this.scrollHeight + 3 + 'px'"
+                />
+              </div>
+            </div>
+            <button
+              class="button full"
+              @click.prevent="setDay(dayView.date.formatted, dayView.data)"
+            >Save</button>
+            <span
+              v-if="dayView.error"
+              class="center full red-text lighten-2=text"
+            >{{ dayView.error }}</span>
+          </template>
+          <template v-else>
+            <div ref="entry" class="catflex vertical">
+              <div v-for="(v, k) in dayView.data" :key="k" class="catflex vertical segment">
+                <label>{{ k }}</label>
+                <pre v-html="formatPreview(dayView.data[k])"/>
+              </div>
+            </div>
+          </template>
         </div>
       </div>
     </section>
@@ -69,7 +86,8 @@ export default {
       dayView: {
         date: null,
         data: this.defaultDay(),
-        error: ""
+        error: "",
+        editing: false
       },
       allLogs: {}
     };
@@ -164,6 +182,14 @@ export default {
       this.calendar.date[forward ? "add" : "subtract"](1, "month");
       this.populateCalendar();
     },
+    fixHeights() {
+      setTimeout(() => {
+        for (const el of this.$refs.entry.querySelectorAll("textarea")) {
+          el.style.height = "";
+          el.style.height = el.scrollHeight + 3 + "px";
+        }
+      }, 0);
+    },
     async selectDay(day) {
       if (this.dayView.date) {
         this.dayView.date.class.selected = false;
@@ -173,12 +199,7 @@ export default {
 
       this.dayView.data = await this.getDay(day.formatted);
 
-      setTimeout(() => {
-        for (const el of this.$refs.entry.querySelectorAll("textarea")) {
-          el.style.height = "";
-          el.style.height = el.scrollHeight + 3 + "px";
-        }
-      }, 0);
+      this.fixHeights();
     },
 
     defaultDay() {
@@ -225,6 +246,22 @@ export default {
         console.error(err, err.response);
         this.dayView.error = err.response.data.message;
       }
+    },
+
+    toggleEdit() {
+      this.dayView.editing = !this.dayView.editing;
+      this.fixHeights();
+    },
+    formatPreview(text) {
+      return text
+        .replace(
+          /\!([A-Z]+-\d+)/,
+          '<a href="https://granify.atlassian.net/browse/$1" class="icon-link"><img class="icon" src="/img/worklog/jira.png">$1</a>'
+        )
+        .replace(
+          /!([A-z\-]+)\#(\d+)/,
+          '<a href="https://github.com/granify/$1/issues/$2" class="icon-link"><img class="icon" src="/img/worklog/github.png">$1#$2</a>'
+        );
     }
   }
 };

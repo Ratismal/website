@@ -77,3 +77,13 @@
     font-family: 'ubuntu mono';
   }
 }
+
+.entry /deep/ .icon-link {
+
+  .icon {
+    height: 0.8em;
+    width: 0.8em;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+}
