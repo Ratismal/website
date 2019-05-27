@@ -286,6 +286,10 @@ export default {
           '<a href="https://granify.atlassian.net/browse/$1" class="icon-link"><img class="icon" src="/img/worklog/jira.png">$1</a>'
         )
         .replace(
+          /!([A-z\-]+)\/([A-z\-]+)\#(\d+)/g,
+          '<a href="https://github.com/$1/$2/issues/$3" class="icon-link"><img class="icon" src="/img/worklog/github.png">$2#$3</a>'
+        )
+        .replace(
           /!([A-z\-]+)\#(\d+)/g,
           '<a href="https://github.com/granify/$1/issues/$2" class="icon-link"><img class="icon" src="/img/worklog/github.png">$1#$2</a>'
         );
