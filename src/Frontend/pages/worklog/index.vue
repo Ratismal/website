@@ -193,6 +193,9 @@ export default {
     async selectDay(day) {
       if (this.dayView.date) {
         this.dayView.date.class.selected = false;
+        try {
+          await this.setDay();
+        } catch (err) { }
       }
       this.dayView.date = day;
       day.class.selected = true;
@@ -229,9 +232,32 @@ export default {
         return this.defaultDay();
       }
     },
-    async setDay() {
+    async deleteDay() {
       this.dayView.error = "";
-      console.log(this.dayView.data);
+      try {
+        await this.$axios.$delete(
+          "/worklog/day/" + this.dayView.date.formatted,
+          {
+            headers: {
+              wlpass: localStorage.wlpass
+            }
+          }
+        );
+        this.dayView.date.class.hasValue = false;
+      } catch (err) {
+        console.error(err, err.response);
+        this.dayView.error = err.response.data.message;
+      }
+    },
+    async setDay() {
+      if (!this.dayView.data.completed
+        && !this.dayView.data.todo
+        && !this.dayView.data.issues
+        && !this.dayView.data.blocking
+        && !this.dayView.data.extra) {
+        return await this.deleteDay();
+      }
+      this.dayView.error = "";
       try {
         await this.$axios.$post(
           "/worklog/day/" + this.dayView.date.formatted,
@@ -242,6 +268,7 @@ export default {
             }
           }
         );
+        this.dayView.date.class.hasValue = true;
       } catch (err) {
         console.error(err, err.response);
         this.dayView.error = err.response.data.message;

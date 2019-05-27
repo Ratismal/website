@@ -8,11 +8,11 @@ module.exports = (sequelize, Sequelize) => {
 
     completed: {
       type: Sequelize.TEXT,
-      allowNull: false
+      allowNull: true
     },
     todo: {
       type: Sequelize.TEXT,
-      allowNull: false
+      allowNull: true
     },
     issues: {
       type: Sequelize.TEXT

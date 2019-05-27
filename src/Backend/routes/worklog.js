@@ -26,6 +26,7 @@ module.exports = class WorkLogRoute extends Route {
     this.router.get('/all', this.getAll.bind(this));
     this.router.get('/day/:date', this.getLog.bind(this));
     this.router.post('/day/:date', this.setLog.bind(this));
+    this.router.delete('/day/:date', this.deleteLog.bind(this));
   }
 
   async check(ctx) {
@@ -58,8 +59,6 @@ module.exports = class WorkLogRoute extends Route {
 
   async setLog(ctx) {
     const body = ctx.request.body;
-    ctx.assert(body.completed, 400, 'completed is required');
-    ctx.assert(body.todo, 400, 'next is required');
 
     const payload = {
       completed: body.completed,
@@ -72,6 +71,20 @@ module.exports = class WorkLogRoute extends Route {
 
     await this.db.worklog.upsert(payload);
 
+    ctx.status = 200;
+    ctx.body = { message: 'ok' };
+  }
+
+  async deleteLog(ctx) {
+    const log = await this.db.worklog.findOne({
+      where: {
+        date: ctx.state.date.format()
+      }
+    });
+
+    ctx.assert(log, 404, 'Entry not found.');
+
+    await log.destroy();
     ctx.status = 200;
     ctx.body = { message: 'ok' };
   }
