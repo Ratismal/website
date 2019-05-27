@@ -191,6 +191,8 @@ export default {
       }, 0);
     },
     async selectDay(day) {
+      if (this.loading) return;
+      this.loading = true;
       if (this.dayView.date) {
         this.dayView.date.class.selected = false;
         try {
@@ -203,6 +205,7 @@ export default {
       this.dayView.data = await this.getDay(day.formatted);
 
       this.fixHeights();
+      this.loading = false;
     },
 
     defaultDay() {
