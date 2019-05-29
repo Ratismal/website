@@ -1,5 +1,8 @@
 <template>
   <main>
+    <!-- <section :class="{'lock-overlay': true, locked: locked}">
+      <h1 class="center">Please wait...</h1>
+    </section> -->
     <section v-if="loading">
       <h1 class="center">Loading...</h1>
     </section>
@@ -73,6 +76,7 @@ export default {
   data() {
     return {
       loading: true,
+      locked: false,
       state: "login",
       login: {
         password: "",
@@ -191,13 +195,13 @@ export default {
       }, 0);
     },
     async selectDay(day) {
-      if (this.loading) return;
-      this.loading = true;
+      if (this.locked) return;
+      this.locked = true;
       if (this.dayView.date) {
         this.dayView.date.class.selected = false;
         try {
           await this.setDay();
-        } catch (err) { }
+        } catch (err) {}
       }
       this.dayView.date = day;
       day.class.selected = true;
@@ -205,7 +209,7 @@ export default {
       this.dayView.data = await this.getDay(day.formatted);
 
       this.fixHeights();
-      this.loading = false;
+      this.locked = false;
     },
 
     defaultDay() {
@@ -253,11 +257,13 @@ export default {
       }
     },
     async setDay() {
-      if (!this.dayView.data.completed
-        && !this.dayView.data.todo
-        && !this.dayView.data.issues
-        && !this.dayView.data.blocking
-        && !this.dayView.data.extra) {
+      if (
+        !this.dayView.data.completed &&
+        !this.dayView.data.todo &&
+        !this.dayView.data.issues &&
+        !this.dayView.data.blocking &&
+        !this.dayView.data.extra
+      ) {
         return await this.deleteDay();
       }
       this.dayView.error = "";
