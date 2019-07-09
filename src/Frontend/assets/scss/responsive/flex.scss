@@ -5,6 +5,10 @@
     align-items: center;
   }
 
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
   &.vert-baseline {
     align-items: baseline;
   }
