@@ -2,11 +2,11 @@
 function getClass(c) {
   if (c <= 0) {
     return 'c-none';
-  } else if (c > 0 && c <= 3) {
+  } else if (c > 0 && c <= 4) {
     return 'c-low';
-  } else if (c > 3 && c <= 8) {
+  } else if (c > 4 && c <= 9) {
     return 'c-mid';
-  } else if (c > 8 && c <= 14) {
+  } else if (c > 9 && c <= 14) {
     return 'c-high';
   } else return 'c-perfect';
 }

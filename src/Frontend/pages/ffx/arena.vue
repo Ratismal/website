@@ -118,9 +118,12 @@ export default {
     getSCButtonClass(sc) {
       let c = "c-none";
       let monsters = Object.values(this.data.types[sc.type]);
-      if (monsters.every(m => m.count >= sc.quantity)) {
-        c = "c-perfect";
-      }
+      let lowest = monsters.reduce((acu, cur) => Math.min(acu, cur.count), 15);
+      let half = sc.quantity / 2;
+      console.log(sc.type, lowest, half);
+      if (lowest > 0 && lowest <= half) c = "c-low";
+      else if (lowest > half && lowest < sc.quantity) c = "c-mid";
+      else if (lowest === sc.quantity) c = "c-perfect";
 
       return {
         button: true,
