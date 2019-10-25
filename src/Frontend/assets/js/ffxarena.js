@@ -26,6 +26,7 @@ export default class Data {
       m = new Monster(monster, type);
     } else m = monster;
     if (!this.monsters[m.name]) this.monsters[m.name] = m;
+    else m = this.monsters[m.name];
     if (!this.types[m.type]) this.types[m.type] = {};
     if (!this.types[m.type][m.name]) this.types[m.type][m.name] = m;
     return m;
