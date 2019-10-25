@@ -1,3 +1,15 @@
+
+function getClass(c) {
+  if (c <= 0) {
+    return 'c-none';
+  } else if (c > 0 && c <= 3) {
+    return 'c-low';
+  } else if (c > 3 && c <= 8) {
+    return 'c-mid';
+  } else if (c > 8 && c <= 14) {
+    return 'c-high';
+  } else return 'c-perfect';
+}
 export default class Data {
   constructor() {
     this.monsters = {};
@@ -273,6 +285,11 @@ class Area {
     this.data.locations[name] = this;
   }
 
+  get class() {
+    let lowest = Object.values(this.monsters).reduce((acu, cur) => Math.min(acu, cur.count), 15);
+    return getClass(lowest);
+  }
+
   add(monster, type) {
     let m = this.data.add(monster, type);
     this.monsters[m.name] = m;
@@ -286,10 +303,22 @@ class Monster {
     this.type = type;
     this.count = 0;
   }
+
+  get class() {
+    let c = ['monster'];
+
+    c.push(getClass(this.count));
+
+    return c;
+  }
+
+
   increment() {
+    // this.count++;
     this.count = Math.min(15, this.count + 1);
   }
   decrement() {
+    // this.count--;
     this.count = Math.max(0, this.count - 1);
   }
 }

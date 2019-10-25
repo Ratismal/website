@@ -33,7 +33,7 @@
       </template>
 
       <div class="monster-wrapper">
-        <div v-for="(monster) in filteredMonsters" :key="monster.name" class="monster">
+        <div v-for="(monster) in filteredMonsters" :key="monster.name" :class="monster.class">
           <div class="monster-name">
             <span class="name">{{ monster.name }}</span>
             <span class="type">{{ monster.type }}</span>
@@ -96,9 +96,11 @@ export default {
       this.selectedArea = area;
     },
     getAreaButtonClass(area) {
+      let c = area.class;
       return {
         button: true,
-        selected: this.selectedArea === area
+        selected: this.selectedArea === area,
+        [c]: true
       };
     },
     selectType(type) {
@@ -114,9 +116,16 @@ export default {
       this.selectedSConquest = sc;
     },
     getSCButtonClass(sc) {
+      let c = "c-none";
+      let monsters = Object.values(this.data.types[sc.type]);
+      if (monsters.every(m => m.count >= sc.quantity)) {
+        c = "c-perfect";
+      }
+
       return {
         button: true,
-        selected: this.selectedSConquest === sc
+        selected: this.selectedSConquest === sc,
+        [c]: true
       };
     }
   }
@@ -131,7 +140,6 @@ export default {
 .monster-wrapper {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
 
   .monster {
     box-sizing: border-box;
@@ -186,5 +194,25 @@ export default {
 
 .selected {
   background: rgba(0, 180, 100, 0.8);
+}
+
+$counts: (
+  c-low: rgb(80, 20, 20),
+  c-mid: rgb(126, 63, 1),
+  c-high: rgb(69, 95, 39),
+  c-perfect: rgb(8, 94, 28),
+  c-none: rgb(76, 68, 80)
+);
+
+@each $name, $color in $counts {
+  .#{$name} {
+    background: $color !important;
+  }
+  button.#{$name}:hover {
+    background: lighten($color, 5) !important;
+  }
+  button.#{$name}.selected {
+    background: lighten($color, 10) !important;
+  }
 }
 </style>
