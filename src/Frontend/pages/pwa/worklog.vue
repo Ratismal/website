@@ -8,6 +8,7 @@
 import Worklog from "~/components/pwa/Worklog.vue";
 
 export default {
-  components: { Worklog }
+  components: { Worklog },
+  layout: "pwa"
 };
 </script>

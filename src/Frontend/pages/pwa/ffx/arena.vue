@@ -8,6 +8,7 @@
 import FfxArena from "~/components/pwa/FfxArena.vue";
 
 export default {
-  components: { FfxArena }
+  components: { FfxArena },
+  layout: "pwa"
 };
 </script>

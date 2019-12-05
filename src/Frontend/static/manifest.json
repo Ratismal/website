@@ -1,0 +1,16 @@
+{
+  "short_name": "stupid cat",
+  "name": "stupid cat",
+  "icons": [
+    {
+      "src": "/img/avatars/31.png",
+      "type": "image/png",
+      "sizes": "320x320"
+    }
+  ],
+  "start_url": "/pwa",
+  "background_color": "#252525",
+  "display": "standalone",
+  "scope": "/pwa",
+  "theme_color": "#252525"
+}
