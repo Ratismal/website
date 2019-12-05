@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pwa-footer-wrapper">
     <footer class="pwa-footer">
       <div class="button-bar">
         <button class="butt">
@@ -33,6 +33,11 @@ export default {
 </script>
 
 <style lang="scss">
+.pwa-footer-wrapper {
+  height: 70px;
+  margin: 0;
+  padding: 0;
+}
 .pwa-footer {
   position: fixed;
   bottom: 0;
