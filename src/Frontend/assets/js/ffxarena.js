@@ -2,11 +2,11 @@
 function getClass(c) {
   if (c <= 0) {
     return 'c-none';
-  } else if (c > 0 && c <= 4) {
+  } else if (c > 0 && c <= 3) {
     return 'c-low';
-  } else if (c > 4 && c <= 9) {
+  } else if (c > 3 && c <= 6) {
     return 'c-mid';
-  } else if (c > 9 && c <= 14) {
+  } else if (c > 6 && c <= 9) {
     return 'c-high';
   } else return 'c-perfect';
 }
@@ -287,7 +287,7 @@ class Area {
   }
 
   get class() {
-    let lowest = Object.values(this.monsters).reduce((acu, cur) => Math.min(acu, cur.count), 15);
+    let lowest = Object.values(this.monsters).reduce((acu, cur) => Math.min(acu, cur.count), 10);
     return getClass(lowest);
   }
 
@@ -316,7 +316,7 @@ class Monster {
 
   increment() {
     // this.count++;
-    this.count = Math.min(15, this.count + 1);
+    this.count = Math.min(10, this.count + 1);
   }
   decrement() {
     // this.count--;
