@@ -23,7 +23,7 @@ export default {
     return {
       title: 'Stalk Market',
       meta: [
-        { hid: 'description', name: 'description', content: null }
+        { hid: 'description', name: 'description', content: 'A utility to track the Stalk Market\'s trends.' }
       ]
     };
   }
