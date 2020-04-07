@@ -87,11 +87,21 @@
               <td class="center">{{ week.meta.weekName }}</td>
               <td class="center">{{ week.meta.purchasedFor }}</td>
               <td class="center">{{ week.meta.purchased }}</td>
-              <td class="center">{{ week.meta.purchasedFor * week.meta.purchased * 100 }}</td>
-              <td class="center">{{ week.meta.soldFor }}</td>
-              <td class="center">{{ week.meta.soldFor * week.meta.purchased * 100 }}</td>
               <td class="center">
-                {{ (week.meta.soldFor * week.meta.purchased * 100) - (week.meta.purchasedFor * week.meta.purchased * 100) }}
+                <template v-if="week.meta.purchased">
+                  {{ week.meta.purchasedFor * week.meta.purchased * 100 }}
+                </template>
+              </td>
+              <td class="center">{{ week.meta.soldFor }}</td>
+              <td class="center">
+                <template v-if="week.meta.soldFor">
+                  {{ week.meta.soldFor * week.meta.purchased * 100 }}
+                </template>
+              </td>
+              <td class="center">
+                <template v-if="week.meta.soldFor">
+                  {{ (week.meta.soldFor * week.meta.purchased * 100) - (week.meta.purchasedFor * week.meta.purchased * 100) }}
+                </template>
               </td>
               <td class="center">
                 <button class="button full" @click.prevent="selectedWeek = i">Select</button>
