@@ -1,7 +1,7 @@
-@import 'variables';
-@import 'parallax';
-@import 'text';
-@import 'responsive/base';
+@import "variables";
+@import "parallax";
+@import "text";
+@import "responsive/base";
 
 html,
 body,
@@ -90,6 +90,14 @@ footer {
   &:hover {
     background: rgba(0, 180, 100, 0.8);
   }
+
+  &.danger {
+    background: rgba(250, 14, 14, 0.5);
+
+    &:hover {
+      background: rgba(250, 14, 14, 0.8);
+    }
+  }
 }
 
 textarea {
@@ -103,7 +111,8 @@ textarea {
   box-sizing: border-box;
 }
 
-input, select {
+input,
+select {
   background: rgba(0, 0, 0, 0.4);
   border: none;
   outline: none;

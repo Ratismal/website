@@ -44,8 +44,6 @@ class Frontend {
       await next();
     });
 
-
-
     this.app.use(async (ctx, next) => {
       if (!ctx.path.startsWith('/api')) {
         return new Promise((res, rej) => {

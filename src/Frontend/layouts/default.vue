@@ -13,6 +13,13 @@ import FooterBar from "~/components/FooterBar.vue";
 import Toaster from "~/components/Toaster.vue";
 
 export default {
-  components: { HeaderBar, FooterBar, Toaster }
+  components: { HeaderBar, FooterBar, Toaster },
+  mounted() {
+    if (process.client) {
+      if (localStorage.token) {
+        this.$axios.setToken(localStorage.token);
+      }
+    }
+  }
 };
 </script>
