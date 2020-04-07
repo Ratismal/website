@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1>Henlo stinky {{ $store.state.user.username }}</h1>
-    <stalks :id="$store.state.user.id" :edit="true"/>
+    <template v-if="$store.state.user">
+      <h1>Henlo stinky {{ $store.state.user.username }}</h1>
+      <stalks :id="$store.state.user.id" :edit="true"/>
+    </template>
   </div>
 </template>
 
