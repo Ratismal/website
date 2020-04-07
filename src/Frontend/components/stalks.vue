@@ -63,7 +63,6 @@
           </tr>
         </tbody>
       </table>
-
       <button class="button full" @click.prevent="save">Save</button>
       <div>{{ message }}</div>
     </section>
