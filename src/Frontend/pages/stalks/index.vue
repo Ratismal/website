@@ -18,6 +18,14 @@ export default {
     if (!this.$store.state.user) {
       this.$router.push('/login');
     }
+  },
+  head() {
+    return {
+      title: 'Stalk Market',
+      meta: [
+        { hid: 'description', name: 'description', content: null }
+      ]
+    };
   }
 };
 </script>

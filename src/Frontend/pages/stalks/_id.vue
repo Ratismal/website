@@ -15,6 +15,14 @@ export default {
     return {
       id: this.$route.params.id
     };
+  },
+  head() {
+    return {
+      title: 'Stalk Market',
+      meta: [
+        { hid: 'description', name: 'description', content: null }
+      ]
+    };
   }
 };
 </script>
