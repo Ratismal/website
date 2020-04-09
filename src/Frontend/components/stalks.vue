@@ -83,24 +83,20 @@
           </thead>
           <tbody>
             <tr v-for="(week, i) of stalks.weeks" :key="i">
-              <td class="center">{{ week.meta.weekName }}</td>
-              <td class="center">{{ week.meta.purchasedFor }}</td>
-              <td class="center">{{ week.meta.purchased }}</td>
+              <td class="center">{{ formatNumber(week.meta.weekName) }}</td>
+              <td class="center">{{ formatNumber(week.meta.purchasedFor) }}</td>
+              <td class="center">{{ formatNumber(week.meta.purchased) }}</td>
               <td class="center">
                 <template v-if="week.meta.purchased">
-                  {{ week.meta.purchasedFor * week.meta.purchased * 100 }}
+                  {{ formatNumber(week.meta.purchasedFor * week.meta.purchased * 100) }}
                 </template>
               </td>
               <td class="center">{{ week.meta.soldFor }}</td>
               <td class="center">
-                <template v-if="week.meta.soldFor">
-                  {{ week.meta.soldFor * week.meta.purchased * 100 }}
-                </template>
+                {{ formatNumber(week.meta.soldFor * week.meta.purchased * 100) }}
               </td>
               <td class="center">
-                <template v-if="week.meta.soldFor">
-                  {{ (week.meta.soldFor * week.meta.purchased * 100) - (week.meta.purchasedFor * week.meta.purchased * 100) }}
-                </template>
+                {{ formatNumber((week.meta.soldFor * week.meta.purchased * 100) - (week.meta.purchasedFor * week.meta.purchased * 100)) }}
               </td>
               <td class="center">
                 <button class="button full" @click.prevent="selectedWeek = i">Select</button>
@@ -125,7 +121,7 @@
             <tr v-for="(time, key) of times" :key="key">
               <th>{{ key }}</th>
               <td v-for="i of time" :key="i" class="center">
-                {{ week.times[i] }}
+                {{ formatNumber(week.times[i]) }}
               </td>
             </tr>
           </tbody>
@@ -194,6 +190,11 @@ export default {
     }
   },
   methods: {
+    formatNumber(number) {
+      if (number)
+        return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+      else return '';
+    },
     async getStalks() {
       console.log('Fetching stalks');
       const res = await this.$axios.$get('/stalk/' + this.id);
