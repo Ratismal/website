@@ -274,6 +274,8 @@ export default {
     },
     handleOut() {
       if (!this.isDragging) return;
+
+      this.handleUnclick();
     },
     undo() {
       const history = this.history.shift();
