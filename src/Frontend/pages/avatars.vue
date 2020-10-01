@@ -30,5 +30,6 @@ export default {
   & > * {
     margin: 15px;
   }
+  justify-content: center;
 }
 </style>
