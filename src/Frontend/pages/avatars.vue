@@ -18,7 +18,7 @@ import Avatar from "~/components/Avatar.vue";
 export default {
   components: { Avatar },
   data: () => ({
-    total: 31
+    total: 32
   })
 };
 </script>
@@ -30,5 +30,6 @@ export default {
   & > * {
     margin: 15px;
   }
+  justify-content: center;
 }
 </style>
