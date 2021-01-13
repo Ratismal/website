@@ -156,6 +156,13 @@ html, body, #__nuxt, #__layout, #nuxt-wrapper, .ppls, .layout {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
+    border: 4px solid #ABB9B5;
+  }
+
+  .content {
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
   }
 }
 
