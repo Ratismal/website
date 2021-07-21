@@ -7,7 +7,9 @@
           <div v-for="tile in state" :key="tileKey(tile)" :class="tileClass(tile)" class="tile" @click.prevent="selectTile(tile)">
             {{ original ? tile.number : tile.value || '' }}
             <div v-if="tile.locked" class="lock"/>
-            <div v-if="tile.question.length > 0" class="question"/>
+            <div v-if="tile.question.length > 0" class="question">
+              <div v-for="q of tile.question" :key="q" :class="'value value-' + q"/>
+            </div>
             <div class="wrong">!</div>
           </div>
         </div>
@@ -18,10 +20,12 @@
             <div :class="tileClass(selectedTile)" class="wumbo tile no-border-right no-border-lower">
               {{ original ? selectedTile.number : selectedTile.value || '' }}
               <div v-if="selectedTile.locked" class="lock"/>
-              <div v-if="selectedTile.question.length > 0" class="lock"/>
+              <div v-if="selectedTile.question.length > 0" class="question">
+                <div v-for="q of selectedTile.question" :key="q" :class="'value value-' + q"/>
+              </div>
             </div>
             <div class="tiles">
-              <div v-for="i in 16" :key="i" :class="tileSelectClass(i)" @click.prevent="selectTileColor(i)">
+              <div v-for="i in 16" :key="i" :class="tileSelectClass(i)" @click.prevent="selectTileColor(i, $event)">
                 {{ i }}
               </div>
             </div>
@@ -96,17 +100,29 @@ export default {
         e.preventDefault();
       }
     },
-    selectTileColor(value) {
+    selectTileColor(value, event) {
       if (this.selectedTile.locked) return;
 
-      if (this.selectedTile.value === value) {
+      if (event.shiftKey) {
+        if (this.selectedTile.question.includes(value)) {
+          this.selectedTile.question.splice(this.selectedTile.question.indexOf(value), 1);
+        } else {
+          this.selectedTile.question.push(value);
+        }
         this.selectedTile.value = 0;
         this.selectedTile.color = null;
         this.selectedTile.number = null;
       } else {
-        this.selectedTile.value = value;
-        this.selectedTile.color = colorMap[value - 1];
-        this.selectedTile.number = numberMap[value - 1];
+        if (this.selectedTile.value === value) {
+          this.selectedTile.value = 0;
+          this.selectedTile.color = null;
+          this.selectedTile.number = null;
+        } else {
+          this.selectedTile.value = value;
+          this.selectedTile.color = colorMap[value - 1];
+          this.selectedTile.number = numberMap[value - 1];
+        }
+        this.selectedTile.question = [];
       }
 
       this.saveDiary();
@@ -151,7 +167,9 @@ export default {
         'no-border-lower'
       ];
 
-      if (tile.locked || (this.relatedTiles && this.relatedTiles.find(t => t.value === i && t.value !== this.selectedTile.value))) {
+      if (tile.locked ||
+        (this.relatedTiles &&
+          this.relatedTiles.find(t => t !== tile && (t.value === i || t.question.includes(i))))) {
         c.push('disabled');
       }
 
@@ -183,7 +201,7 @@ export default {
 
       if (tile.value !== 0) {
         const related = this.getRelatedTiles(tile);
-        if (related.find(t => t.value === tile.value && t !== tile)) {
+        if (related.find(t => t !== tile && (t.value === tile.value || t.question.includes(tile.value)))) {
           c.wrong = true;
         }
       }
@@ -273,6 +291,7 @@ $tile-types:
   align-items: center;
   background: white;
   color: black;
+  user-select: none;
 
   &.wumbo {
     width: 80px;
@@ -299,14 +318,14 @@ $tile-types:
 
 }
 
-.colors .tile {
+.colors {
   @for $i from 1 through 16 {
     // &.value-#{$i} {
     //   background: adjust-hue($base-color, 360 / 8 * ($i - 1));
     // }
     $type: nth($tile-types, $i);
 
-    &.value-#{$i} {
+    .value-#{$i} {
       background: map-get($type, 'background');
       color: map-get($type, 'color');
 
@@ -334,6 +353,24 @@ section:not(.original) .tile {
   }
   &.no-border-lower {
     border-bottom: none;
+  }
+
+  .question {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse;
+    height: 40px;
+    width: 40px;
+    align-items: flex-end;
+    align-content: flex-start;
+
+    .value {
+      height: 10px;
+      width: 10px;
+    }
   }
 
   .lock {
