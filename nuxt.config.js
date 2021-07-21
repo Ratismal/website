@@ -2,6 +2,7 @@ const config = require('./config.json');
 
 module.exports = {
   srcDir: 'src/Frontend',
+  telemetry: false,
   /*
   ** Headers of the page
   */
@@ -55,7 +56,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    extractCSS: true,
+    extractCSS: false,
     /*
      ** Run ESLINT on save
      */
