@@ -169,7 +169,7 @@ export default {
 
       if (tile.locked ||
         (this.relatedTiles &&
-          this.relatedTiles.find(t => t !== tile && (t.value === i || t.question.includes(i))))) {
+          this.relatedTiles.find(t => t !== tile && (t.value === i)))) {
         c.push('disabled');
       }
 
