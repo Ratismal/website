@@ -18,7 +18,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-vue": "^4.7.1",
     "sass-lint": "^1.12.1",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "10.1.1"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.3",
