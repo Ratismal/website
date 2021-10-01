@@ -18,7 +18,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-vue": "^4.7.1",
     "sass-lint": "^1.12.1",
-    "sass-loader": "10.1.1"
+    "sass-loader": "10.2.0"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.3",
@@ -34,7 +34,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "marked": "^0.5.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^6.0.1",
     "nuxt": "^2.2.0",
     "pg": "^7.6.1",
     "sequelize": "^4.41.2",
