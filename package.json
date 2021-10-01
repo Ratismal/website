@@ -33,7 +33,7 @@
     "koa": "^2.5.3",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
-    "marked": "^0.5.2",
+    "marked": "^0.7.0",
     "node-sass": "^6.0.1",
     "nuxt": "^2.2.0",
     "pg": "^7.6.1",
