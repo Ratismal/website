@@ -23,8 +23,8 @@
       </p>
 
       <p>
-        I'm currently a third-year student at the
-        <a href="http://nait.ca">Northern Alberta Institute of Technology</a>, where I'm working towards my
+        I'm a graduate of the
+        <a href="http://nait.ca">Northern Alberta Institute of Technology</a>, with a
         <a href="http://www.nait.ca/program_home_78547.htm">Bachelor of Applied Information Systems Technology (BAIST)
         </a>.
       </p>
@@ -43,14 +43,11 @@
     <section>
       <h2>Projects & Experience</h2>
 
-      <p>I've worked at
-        <a href="https://policywise.com/">PolicyWise for Children & Families</a>
-        for the past two years as a summer student, and am still currently contracted on an as-needed basis.</p>
-      <p>Additionally, I've created and maintain several projects, most of which are
+      <p>Outside from work, I create and maintain several projects, most of which are
         <a href="https://github.com/ratismal">open-source</a>. This website is
       <a href="https://github.com/ratismal/website">one of them</a>!</p>
-      <p>My biggest ongoing project is
-        <a href="https://blargbot.xyz">blargbot</a>, a bot for the
+      <p>My biggest ongoing projects are
+        <a href="https://blargbot.xyz">blargbot</a> and <a href="https://github.com/ratismal/uno">UNO</a>, bots for the
         <a href="https://discordapp.com">Discord</a>
         chat platform which specializes in moderation utilities and customization.
         <code>blargbot</code> features
