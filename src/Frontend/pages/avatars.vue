@@ -3,8 +3,9 @@
     <section>
       <h1>Avatars</h1>
       <p>This is a collection of all the avatars I've made and used. For your convenience, images will only
-        <!-- -->display when you hover over them!</p>
-      <p>Please do not use any of these for your own social media profiles or avatars.</p>
+      animate when you hover over them!</p>
+      <p>This page exists for historic archiving purposes. All rights reserved.
+      Please do not use any of these for your own social media profiles or avatars.</p>
     </section>
     <div class="flexbox">
       <avatar v-for="n in total" :key="n" :avatar-id="n" />
