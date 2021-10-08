@@ -18,7 +18,7 @@ import Avatar from "~/components/Avatar.vue";
 export default {
   components: { Avatar },
   data: () => ({
-    total: 33
+    total: 34
   })
 };
 </script>
