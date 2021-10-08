@@ -73,10 +73,6 @@ figure {
 .avatar {
   position: relative;
 
-  picture {
-    cursor: none;
-  }
-
   .animation-indicator {
     position: absolute;
     top: 2px;
