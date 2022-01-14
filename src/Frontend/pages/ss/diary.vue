@@ -18,6 +18,7 @@
             <h2>Selected</h2>
             <div>Coords: {{ selectedTile.x }}, {{ selectedTile.y }}</div>
             <div>Term: {{ getTerm(selectedTile) }}</div>
+            <div>Color: {{ getColor(selectedTile) }}</div>
             <div :class="tileClass(selectedTile)" class="wumbo tile no-border-right no-border-lower">
               {{ original ? selectedTile.number : selectedTile.value || '' }}
               <div v-if="selectedTile.locked" class="lock"/>
@@ -46,9 +47,24 @@
 <script>
 import diary from '@/assets/json/diary.json';
 
-const numberMap = [25, 14, 28, 3, 6, 7, 26, 8, 22, 13, 27, 11, 19, 16, 9, 5];
-const colorMap = ['gold', 'bronze', 'copper', 'grey', 'green', 'white', 'red', 'black', 'blue', 'iron', 'silver', 'brass', 'gold', 'bronze', 'copper', 'grey' ];
-const terms = ['to break', 'door', 'name', 'to accomplish', 'sheep', 'boat', 'tiger', 'to see', 'to approach', 'mountain', 'to open', 'achievement', 'mouth', 'to sink', 'cauldron', 'to drop behind'];
+const numberMap = [
+  25, 14, 28, 3,
+  6, 7, 26, 8,
+  22, 13, 27, 11,
+  19, 16, 9, 5
+];
+const colorMap = [
+  'gold', 'bronze', 'copper', 'grey',
+  'green', 'white', 'red', 'black',
+  'blue', 'iron', 'silver', 'brass',
+  'gold', 'bronze', 'copper', 'grey'
+];
+const terms = [
+  'to break', 'door', 'name', 'to accomplish',
+  'sheep', 'boat', 'tiger', 'to see',
+  'to approach', 'mountain', 'to open', 'achievement',
+  'mouth', 'to sink', 'cauldron', 'to drop behind'
+];
 
 export default {
   data() {
@@ -134,7 +150,10 @@ export default {
       this.relatedTiles = this.getRelatedTiles(tile);
     },
     getTerm(tile) {
-      return terms[tile.value];
+      return terms[tile.value - 1];
+    },
+    getColor(tile) {
+      return colorMap[tile.value - 1];
     },
     toggleOriginal() {
       this.original = !this.original;
