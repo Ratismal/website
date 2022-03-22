@@ -72,7 +72,12 @@ module.exports = class DndRoute extends Route {
 
     console.log(this.cache.length);
 
-    const game = this.cache.find(g => g.name.toLowerCase() === title.toLowerCase());
+    let game = this.cache.find(g => g.name.toLowerCase() === title.toLowerCase());
+    if (!game) {
+      const stripRegex = /[^a-zA-Z0-9]/g;
+      const strippedTitle = title.toLowerCase().replace(stripRegex, '');
+      game = this.cache.find(g => g.name.toLowerCase().replace(stripRegex, '') === strippedTitle);
+    }
 
     if (game) {
       const res = await axios.get(STEAM_APP_ENDPOINT + game.appid);

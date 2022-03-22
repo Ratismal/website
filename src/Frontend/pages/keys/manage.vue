@@ -32,7 +32,7 @@
           <label>Title</label>
           <input v-model="title" type="text">
           <label>Key</label>
-          <input v-model="key" type="text" placeholder="XXXX-XXXX-XXXX-XXXX">
+          <input v-model="key" type="text" placeholder="XXXXX-XXXXX-XXXXX">
           <button class="button" @click.prevent="addKey">Add</button>
         </div>
         <div v-if="error">{{ error }}</div>
