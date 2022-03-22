@@ -44,6 +44,7 @@ export default {
 .game-wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .game {
