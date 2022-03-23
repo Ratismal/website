@@ -36,6 +36,8 @@
           <button class="button" @click.prevent="addKey">Add</button>
         </div>
         <div v-if="error">{{ error }}</div>
+
+        <button class="button" @click.prevent="refresh">Refresh</button>
       </div>
     </section>
   </main>
@@ -86,6 +88,12 @@ export default {
       } catch {
         this.error = 'Something went wrong. Perhaps game could not be found?';
       }
+    },
+    async refresh() {
+      await this.$axios.$post('/gamekeys/keys/refresh');
+      this.keys = await this.$axios.$get('/gamekeys/keys/detailed');
+
+      console.log(this.keys);
     }
   }
 };

@@ -12,14 +12,24 @@
           <div class="game-image">
             <img :src="key.headerImage" >
           </div>
-          <div class="title">
-            {{ key.title }}
-          </div>
-          <div class="rating">
-            ({{ key.meta.reviews.review_score_desc }}:
-            {{ (key.meta.reviews.total_positive / key.meta.reviews.total_reviews * 100).toFixed(0) }}%)
+          <div class="title-wrapper">
+            <div class="title">
+              {{ key.title }}
+            </div>
+            <div class="rating">
+              ({{ key.meta.reviews.review_score_desc }}:
+              {{ (key.meta.reviews.total_positive / key.meta.reviews.total_reviews * 100).toFixed(0) }}%)
+            </div>
           </div>
           <div class="spacer"/>
+          <div class="price">
+            <div v-if="key.meta.data.price_overview.initial_formatted" class="regular-price">
+              {{ key.meta.data.price_overview.initial_formatted }}
+            </div>
+            <div class="final-price">
+              {{ key.meta.data.price_overview.final_formatted }}
+            </div>
+          </div>
           <div class="link">
             <a :href="key.link" target="_blank">Link</a>
           </div>
@@ -63,5 +73,38 @@ export default {
 
 .spacer {
   flex: 1 0 auto;
+}
+
+.price {
+  text-align: right;
+}
+
+.regular-price {
+  font-size: 0.8em;
+  text-decoration: line-through;
+}
+
+@media screen and (max-width: 700px) {
+  .game {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px;
+  }
+
+  .spacer {
+    display: none;
+  }
+
+  .link {
+    text-align: right;
+  }
+
+  .price {
+    text-align: left;
+  }
+
+  .game-wrapper {
+    gap: 20px;
+  }
 }
 </style>

@@ -3,7 +3,7 @@ const config = require('../../../config.json');
 const axios = require('axios');
 
 const STEAM_ENDPOINT = 'https://api.steampowered.com/ISteamApps/GetAppList/v2/';
-const STEAM_APP_ENDPOINT = 'https://store.steampowered.com/api/appdetails?appids=';
+const STEAM_APP_ENDPOINT = 'https://store.steampowered.com/api/appdetails?&language=en_ca&appids=';
 const STEAM_REVIEW_ENDPOINT = (id) => `https://store.steampowered.com/appreviews/${id}?json=1&language=all`;
 
 module.exports = class DndRoute extends Route {
@@ -27,6 +27,7 @@ module.exports = class DndRoute extends Route {
       return next();
     });
     this.router.delete('/key/:keyId', this.deleteKey.bind(this));
+    this.router.post('/keys/refresh', this.refreshKeys.bind(this));
     // this.router.post('/character/:id', this.setDndCharacter.bind(this));
   }
 
@@ -53,7 +54,12 @@ module.exports = class DndRoute extends Route {
       link: key.link,
       appId: key.appId,
       headerImage: key.headerImage,
-      meta: key.meta,
+      meta: {
+        reviews: key.meta.reviews,
+        data: {
+          price_overview: key.meta.data.price_overview
+        }
+      },
       id: key.id
     }));
   }
@@ -92,6 +98,29 @@ module.exports = class DndRoute extends Route {
     return null;
   }
 
+  async refreshKeys(ctx) {
+    await this.check(ctx);
+
+    const keys = await this.db.game_key.findAll();
+
+    await this.cacheGames();
+
+    for (const key of keys) {
+      const res = await axios.get(STEAM_APP_ENDPOINT + key.appId);
+      const reviews = await axios.get(STEAM_REVIEW_ENDPOINT(key.appId));
+
+      key.meta = {
+        reviews: reviews.data.query_summary,
+        data: res.data[key.appId].data
+      };
+
+      await key.save();
+    }
+
+    ctx.body = 'OK';
+    ctx.status = 200;
+  }
+
   async addKey(ctx, next) {
     this.check(ctx);
 
@@ -108,7 +137,8 @@ module.exports = class DndRoute extends Route {
       link: `https://store.steampowered.com/app/${game.appid}/`,
       headerImage: game.data.header_image,
       meta: {
-        reviews: game.reviews
+        reviews: game.reviews,
+        data: game.data
       }
     });
 
