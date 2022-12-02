@@ -28,12 +28,18 @@
           </tbody>
         </table>
 
-        <form class="field-group" @submit.prevent="addKey">
-          <label>Title</label>
-          <input v-model="title" type="text">
-          <label>Key</label>
-          <input v-model="key" type="text" placeholder="XXXXX-XXXXX-XXXXX">
-          <button class="button" @click.prevent="addKey">Add</button>
+        <form @submit.prevent="addKey">
+          <div class="field-group">
+            <label>Title</label>
+            <input v-model="title" type="text">
+            <label>Key</label>
+            <input v-model="key" type="text" placeholder="XXXXX-XXXXX-XXXXX">
+            <button class="button" @click.prevent="addKey">Add</button>
+          </div>
+          <div class="field-group">
+            <label>Expiry</label>
+            <input v-model="expiry" type="date">
+          </div>
         </form>
         <div v-if="error">{{ error }}</div>
 
@@ -63,7 +69,8 @@ export default {
     return {
       key: '',
       title: '',
-      error: ''
+      error: '',
+      expiry: null
     };
   },
   methods: {
@@ -76,9 +83,12 @@ export default {
     },
     async addKey() {
       try {
+        const expiryDate = new Date(this.expiry);
+        console.log('expiry', expiryDate);
         await this.$axios.$put('/gamekeys/key', {
           key: this.key,
-          title: this.title
+          title: this.title,
+          expiry: expiryDate
         });
         this.key = '';
         this.title = '';

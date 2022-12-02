@@ -54,6 +54,7 @@ module.exports = class DndRoute extends Route {
       link: key.link,
       appId: key.appId,
       headerImage: key.headerImage,
+      expiry: key.expiry,
       meta: {
         reviews: key.meta.reviews,
         data: {
@@ -124,7 +125,7 @@ module.exports = class DndRoute extends Route {
   async addKey(ctx, next) {
     this.check(ctx);
 
-    const { key, title } = ctx.request.body;
+    const { key, title, expiry } = ctx.request.body;
 
     const game = await this.checkGame(title);
     console.log(game);
@@ -134,6 +135,7 @@ module.exports = class DndRoute extends Route {
       key,
       appId: game.appid,
       title: game.name,
+      expiry: expiry ? new Date(expiry) : null,
       link: `https://store.steampowered.com/app/${game.appid}/`,
       headerImage: game.data.header_image,
       meta: {

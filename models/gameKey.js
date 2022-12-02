@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     link: {
       type: DataTypes.STRING
     },
+    expiry: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
     key: {
       type: DataTypes.STRING,
       unique: true

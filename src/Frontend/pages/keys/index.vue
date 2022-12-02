@@ -8,20 +8,24 @@
       </p>
 
       <div class="game-wrapper">
-        <div v-for="key in keys" :key="key.id" class="game">
+        <div v-for="key in keys" :key="key.id" :class="gameClass(key)">
           <div class="game-image">
             <img :src="key.headerImage" >
           </div>
           <div class="title-wrapper">
             <div class="title">
-              {{ key.title }}
+              <span>
+                {{ key.title }}
+              </span>
+              <span v-if="key.expiry" class="expiry">
+                Expires {{ getExpiry(key) }}
+              </span>
             </div>
             <div class="rating">
               ({{ key.meta.reviews.review_score_desc }}:
               {{ (key.meta.reviews.total_positive / key.meta.reviews.total_reviews * 100).toFixed(0) }}%)
             </div>
           </div>
-          <div class="spacer"/>
           <div class="price">
             <div v-if="key.meta.data.price_overview.initial_formatted" class="regular-price">
               {{ key.meta.data.price_overview.initial_formatted }}
@@ -40,12 +44,31 @@
 </template>
 
 <script>
+const moment = require('moment');
+
 export default {
   async asyncData({ $axios }) {
     const data = await $axios.$get('/gamekeys/keys');
+    const expires = data.filter(k => k.expiry !== null);
+    expires.sort((a, b) => {
+      return new Date(a.expiry) - new Date(b.expiry);
+    });
+    const noExpires = data.filter(k => k.expiry === null);
+
     return {
-      keys: data
+      keys: expires.concat(noExpires)
     };
+  },
+  methods: {
+    gameClass(game) {
+      return {
+        game: true,
+        expires: !!game.expiry
+      };
+    },
+    getExpiry(game) {
+      return moment(game.expiry).format('MMM Do, YYYY');
+    }
   }
 };
 </script>
@@ -61,10 +84,31 @@ export default {
   display: flex;
   align-items: center;
   gap: 20px;
+  padding: 0 10px;
+}
+
+.game.expires {
+  background: rgb(64, 30, 30);
 }
 
 .game-image img {
   height: 60px;
+}
+
+.title-wrapper {
+  flex: 1 0 auto;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.expiry {
+  font-size: 0.8em;
+  text-align: right;
+  flex: 1 1 auto;
+  /* align-self: flex-end; */
 }
 
 .rating {
