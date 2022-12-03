@@ -116,10 +116,18 @@ module.exports = class DndRoute extends Route {
       };
 
       await key.save();
+
+      await this.sleep();
     }
 
     ctx.body = 'OK';
     ctx.status = 200;
+  }
+
+  sleep() {
+    return new Promise(res => {
+      setTimeout(res, 5000);
+    });
   }
 
   async addKey(ctx, next) {
