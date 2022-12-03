@@ -112,10 +112,17 @@ module.exports = class DndRoute extends Route {
         const res = await axios.get(STEAM_APP_ENDPOINT + key.appId);
         const reviews = await axios.get(STEAM_REVIEW_ENDPOINT(key.appId));
 
+        const game = res.data[key.appId].data;
+
+        // console.meta({ depth: 10 }).log(res.data[key.appId]);
+
         key.meta = {
           reviews: reviews.data.query_summary,
-          data: res.data[key.appId].data
+          data: game
         };
+        key.title = game.name,
+        key.link = `https://store.steampowered.com/app/${key.appid}/`,
+        key.headerImage = game.header_image,
 
         await key.save();
 
