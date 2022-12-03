@@ -106,19 +106,22 @@ module.exports = class DndRoute extends Route {
 
     await this.cacheGames();
 
-    for (const key of keys) {
-      const res = await axios.get(STEAM_APP_ENDPOINT + key.appId);
-      const reviews = await axios.get(STEAM_REVIEW_ENDPOINT(key.appId));
+    setTimeout(async function() {
+      for (const key of keys) {
+        console.log('Caching game', key.title, key.appId);
+        const res = await axios.get(STEAM_APP_ENDPOINT + key.appId);
+        const reviews = await axios.get(STEAM_REVIEW_ENDPOINT(key.appId));
 
-      key.meta = {
-        reviews: reviews.data.query_summary,
-        data: res.data[key.appId].data
-      };
+        key.meta = {
+          reviews: reviews.data.query_summary,
+          data: res.data[key.appId].data
+        };
 
-      await key.save();
+        await key.save();
 
-      await this.sleep();
-    }
+        await this.sleep();
+      }
+    }, 1);
 
     ctx.body = 'OK';
     ctx.status = 200;
