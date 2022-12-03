@@ -106,7 +106,7 @@ module.exports = class DndRoute extends Route {
 
     await this.cacheGames();
 
-    setTimeout(async function() {
+    setTimeout(async () => {
       for (const key of keys) {
         console.log('Caching game', key.title, key.appId);
         const res = await axios.get(STEAM_APP_ENDPOINT + key.appId);
