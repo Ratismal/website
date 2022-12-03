@@ -121,7 +121,7 @@ module.exports = class DndRoute extends Route {
           data: game
         };
         key.title = game.name,
-        key.link = `https://store.steampowered.com/app/${key.appid}/`,
+        key.link = `https://store.steampowered.com/app/${key.appId}/`,
         key.headerImage = game.header_image,
 
         await key.save();
