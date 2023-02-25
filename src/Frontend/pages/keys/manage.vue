@@ -83,7 +83,10 @@ export default {
     },
     async addKey() {
       try {
-        const expiryDate = new Date(this.expiry);
+        let expiryDate;
+        if (this.expiry) {
+          expiryDate = new Date(this.expiry);
+        }
         console.log('expiry', expiryDate);
         await this.$axios.$put('/gamekeys/key', {
           key: this.key,
