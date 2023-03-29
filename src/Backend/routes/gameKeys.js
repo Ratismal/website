@@ -2,6 +2,10 @@ const Route = require('./route');
 const config = require('../../../config.json');
 const axios = require('axios');
 
+const fs = require('fs/promises');
+const path = require('path');
+
+
 const STEAM_ENDPOINT = 'https://api.steampowered.com/ISteamApps/GetAppList/v2/';
 const STEAM_APP_ENDPOINT = 'https://store.steampowered.com/api/appdetails?&language=en_ca&appids=';
 const STEAM_REVIEW_ENDPOINT = (id) => `https://store.steampowered.com/appreviews/${id}?json=1&language=all`;
@@ -71,6 +75,8 @@ module.exports = class DndRoute extends Route {
       const res = await axios.get(STEAM_ENDPOINT);
       console.log(res);
       this.cache = res.data.applist.apps;
+
+      await fs.writeFile(path.join(__dirname, '..', '..', 'Frontend', 'static', 'gameCache.json'), JSON.stringify(this.cache));
     }
   }
 
