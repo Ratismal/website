@@ -2,7 +2,7 @@ const Route = require('./route');
 const config = require('../../../config.json');
 const axios = require('axios');
 
-const fs = require('fs/promises');
+const fs = require('fs').promises;
 const path = require('path');
 
 
