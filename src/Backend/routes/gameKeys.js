@@ -84,12 +84,18 @@ module.exports = class DndRoute extends Route {
     await this.cacheGames();
 
     console.log(this.cache.length);
-
     let game = this.cache.find(g => g.name.toLowerCase() === title.toLowerCase());
+
     if (!game) {
       const stripRegex = /[^a-zA-Z0-9]/g;
       const strippedTitle = title.toLowerCase().replace(stripRegex, '');
       game = this.cache.find(g => g.name.toLowerCase().replace(stripRegex, '') === strippedTitle);
+    }
+
+    if (/^\d+$/.test(title)) {
+      game = {
+        appid: Number(title)
+      };
     }
 
     if (game) {
