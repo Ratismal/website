@@ -164,7 +164,7 @@ module.exports = class DndRoute extends Route {
     const gameKey = await this.db.game_key.create({
       key,
       appId: game.appid,
-      title: game.name,
+      title: game.data.name,
       expiry: expiry ? new Date(expiry) : null,
       link: `https://store.steampowered.com/app/${game.appid}/`,
       headerImage: game.data.header_image,
