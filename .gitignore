@@ -4,3 +4,4 @@ package-lock.json
 .nuxt
 true
 false
+gameCache.json
