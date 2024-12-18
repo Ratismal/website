@@ -43,8 +43,6 @@ module.exports = class DndRoute extends Route {
   async getDetailedKeys(ctx, next) {
     this.check(ctx);
 
-    console.log('h');
-
     const keys = await this.db.game_key.findAll();
 
     ctx.status = 200;
@@ -54,7 +52,7 @@ module.exports = class DndRoute extends Route {
   async getKeys(ctx, next) {
     const keys = await this.db.game_key.findAll();
 
-    console.log(keys);
+    console.info(keys);
 
     ctx.status = 200;
     ctx.body = keys.map(key => ({
