@@ -6,12 +6,12 @@ a {
   transition-duration: 0.3s;
   
   &:hover {
-    @extend .primary-text.lighten-1-text;
+    @extend .primary-text, .lighten-1-text;
   }
 }
 
 span.subtitle {
-  @extend .grey-text.lighten-2-text;
+  @extend .grey-text, .lighten-2-text;
   display: block;
   font-size: 0.75em;
   margin-top: 0.5em;
@@ -22,13 +22,13 @@ h1 {
 }
 
 code {
-  @extend .purple-text.lighten-3-text;
+  @extend .purple-text, .lighten-3-text;
   transition-duration: 0.3s;
   font-size: 1.1em;
   font-family: 'Ubuntu Mono', monospace;
 
   &:hover {
-    @extend .purple-text.lighten-5-text;
+    @extend .purple-text, .lighten-5-text;
   }
 }
 

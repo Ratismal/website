@@ -2,10 +2,10 @@
 $break-small: 600px;
 $break-medium: 1600px;
 
-$small-screen: screen;
-$medium-screen: screen and (min-width: $break-small);
-$large-screen: screen and (min-width: $break-medium);
+$small-screen: "screen";
+$medium-screen: "screen and (min-width: $break-small)";
+$large-screen: "screen and (min-width: $break-medium)";
 
-$small-screen-only: screen and (max-width: $break-small);
-$medium-screen-only: screen and (max-width: $break-medium) and (min-width: $break-small + 1);
-$large-screen-only: screen and (min-width: $break-medium + 1);
+$small-screen-only: "screen and (max-width: $break-small)";
+$medium-screen-only: "screen and (max-width: $break-medium) and (min-width: $break-small + 1)";
+$large-screen-only: "screen and (min-width: $break-medium + 1)";
