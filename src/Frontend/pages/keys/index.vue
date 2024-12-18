@@ -26,12 +26,12 @@
               {{ (key.meta.reviews.total_positive / key.meta.reviews.total_reviews * 100).toFixed(0) }}%)
             </div>
           </div>
-          <div class="price">
-            <div v-if="key.meta.data.price_overview?.initial_formatted" class="regular-price">
-              {{ key.meta.data.price_overview?.initial_formatted }}
+          <div v-if="key.meta.data.price_overview" class="price">
+            <div v-if="key.meta.data.price_overview.initial_formatted" class="regular-price">
+              {{ key.meta.data.price_overview.initial_formatted }}
             </div>
             <div class="final-price">
-              {{ key.meta.data.price_overview?.final_formatted }}
+              {{ key.meta.data.price_overview.final_formatted }}
             </div>
           </div>
           <div class="link">
