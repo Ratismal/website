@@ -27,11 +27,11 @@
             </div>
           </div>
           <div class="price">
-            <div v-if="key.meta.data.price_overview.initial_formatted" class="regular-price">
-              {{ key.meta.data.price_overview.initial_formatted }}
+            <div v-if="key.meta.data.price_overview?.initial_formatted" class="regular-price">
+              {{ key.meta.data.price_overview?.initial_formatted }}
             </div>
             <div class="final-price">
-              {{ key.meta.data.price_overview.final_formatted }}
+              {{ key.meta.data.price_overview?.final_formatted }}
             </div>
           </div>
           <div class="link">
@@ -49,6 +49,7 @@ const moment = require('moment');
 export default {
   async asyncData({ $axios }) {
     const data = await $axios.$get('/gamekeys/keys');
+    console.log(data);
     const expires = data.filter(k => k.expiry !== null);
     expires.sort((a, b) => {
       return new Date(a.expiry) - new Date(b.expiry);
