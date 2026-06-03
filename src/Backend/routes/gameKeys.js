@@ -6,7 +6,7 @@ const fs = require('fs').promises;
 const path = require('path');
 
 
-const STEAM_ENDPOINT = 'https://api.steampowered.com/ISteamApps/GetAppList/v2/';
+const STEAM_ENDPOINT = `https://partner.steam-api.com/IStoreService/GetAppList/v1/?key=${config.steamKey}&max_results=50000&last_appid=`;
 const STEAM_APP_ENDPOINT = 'https://store.steampowered.com/api/appdetails?&language=en_ca&appids=';
 const STEAM_REVIEW_ENDPOINT = (id) => `https://store.steampowered.com/appreviews/${id}?json=1&language=all`;
 
@@ -73,10 +73,25 @@ module.exports = class DndRoute extends Route {
 
   async cacheGames() {
     if (this.cache.length === 0 || Date.now() - this.lastCache > 1000 * 60 * 60 * 24) {
+      console.log('Caching games');
       this.lastCache = Date.now();
-      const res = await axios.get(STEAM_ENDPOINT);
-      console.log(res);
-      this.cache = res.data.applist.apps;
+      let lastAppId = 0;
+      this.cache = [];
+      while (true) {
+        try {
+          const res = await axios.get(STEAM_ENDPOINT + lastAppId);
+
+          this.cache.push(...res.data.response.apps);
+          if (res.data.response.have_more_results) {
+            lastAppId = res.data.response.last_appid;
+          } else {
+            break;
+          }
+        } catch (err) {
+          console.error(err);
+          break;
+        }
+      }
 
       await fs.writeFile(path.join(__dirname, '..', '..', 'Frontend', 'static', 'gameCache.json'), JSON.stringify(this.cache));
     }
